@@ -29,34 +29,39 @@ export default function Listen() {
     <main className="listen-page">
       <SEO title="Listen" description="Listen to So Nigerian on your favourite podcast platform." path="/listen" />
 
-      <div className={`listen-header reveal ${headerVisible ? 'visible' : ''}`} ref={headerRef}>
-        <Link to="/" className="back-link"><ArrowLeft size={16} /> Back home</Link>
-        <div className="listen-hero-image">
-          <img src="/hosts.png" alt="Dami Aros and Isaac — So Nigerian" />
-          <div className="listen-hero-overlay" />
+      <Link to="/" className="back-link"><ArrowLeft size={16} /> Back home</Link>
+
+      <div className={`listen-split reveal ${headerVisible ? 'visible' : ''}`} ref={headerRef}>
+        <div className="listen-image-side">
+          <div className="listen-image-wrap">
+            <img src="/hosts.png" alt="Dami Aros and Isaac — So Nigerian" />
+            <div className="listen-image-overlay" />
+          </div>
+          <div className="listen-image-footer">
+            <span className="listen-badge">New episodes every Monday</span>
+          </div>
         </div>
-        <div className="eyebrow"><div className="eyebrow-line" /><span>Listen Now</span></div>
-        <h1 className="page-title">Pick your platform</h1>
-        <p className="page-sub">So Nigerian is available everywhere you get your podcasts.</p>
-      </div>
 
-      <div className="platforms-grid">
-        {platforms.map((p, i) => (
-          <RevealItem key={p.name} delay={i * 0.08}>
-            <a href={p.url} target="_blank" rel="noopener noreferrer" className="platform-card">
-              <div className="platform-icon" style={{ background: p.color }}>{p.name.charAt(0)}</div>
-              <div className="platform-info">
-                <h3>{p.name}</h3>
-                <span>Listen on {p.name}</span>
-              </div>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17l9.2-9.2M17 17V7.8M17 7.8H7.8"/></svg>
-            </a>
-          </RevealItem>
-        ))}
-      </div>
+        <div className="listen-content-side">
+          <div className="eyebrow"><div className="eyebrow-line" /><span>Listen Now</span></div>
+          <h1 className="page-title">Pick your platform</h1>
+          <p className="page-sub">So Nigerian is available everywhere you get your podcasts.</p>
 
-      <div className="listen-footer-note">
-        <p>New episodes every Monday. Subscribe and never miss one.</p>
+          <div className="platforms-list">
+            {platforms.map((p, i) => (
+              <RevealItem key={p.name} delay={0.1 + i * 0.06}>
+                <a href={p.url} target="_blank" rel="noopener noreferrer" className="platform-card">
+                  <div className="platform-icon" style={{ background: p.color }}>{p.name.charAt(0)}</div>
+                  <div className="platform-info">
+                    <h3>{p.name}</h3>
+                    <span>Listen on {p.name}</span>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17l9.2-9.2M17 17V7.8M17 7.8H7.8"/></svg>
+                </a>
+              </RevealItem>
+            ))}
+          </div>
+        </div>
       </div>
     </main>
   );
