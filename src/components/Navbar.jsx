@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Play } from 'lucide-react';
 import './Navbar.css';
+
+const FONT_SIZES = [
+  { label: 'A', key: 'small', size: '14px' },
+  { label: 'A', key: 'medium', size: '16px' },
+  { label: 'A', key: 'large', size: '18px' },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [fontSize, setFontSize] = useState(() => localStorage.getItem('sn-fontsize') || 'medium');
+  const [fontMenuOpen, setFontMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -17,10 +25,10 @@ export default function Navbar() {
 
   useEffect(() => {
     setMenuOpen(false);
+    setFontMenuOpen(false);
     document.body.style.overflow = '';
   }, [location]);
 
-  // Handle hash scrolling after navigation
   useEffect(() => {
     if (location.hash && location.pathname === '/') {
       setTimeout(() => {
@@ -30,8 +38,17 @@ export default function Navbar() {
     }
   }, [location]);
 
+  useEffect(() => {
+    const match = FONT_SIZES.find(f => f.key === fontSize);
+    if (match) {
+      document.documentElement.style.setProperty('--body-font-size', match.size);
+      localStorage.setItem('sn-fontsize', fontSize);
+    }
+  }, [fontSize]);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+    setFontMenuOpen(false);
     document.body.style.overflow = !menuOpen ? 'hidden' : '';
   };
 
@@ -45,26 +62,44 @@ export default function Navbar() {
 
   const handleNavClick = (e, link) => {
     e.preventDefault();
-
     if (link.hash) {
       if (location.pathname === '/') {
-        // Already on homepage — just scroll
         const el = document.querySelector(link.hash);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
         else if (link.hash === '#home') window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        // Navigate to homepage first, then scroll after render
         navigate('/' + link.hash);
       }
     } else {
       navigate(link.path);
     }
-
     if (menuOpen) {
       setMenuOpen(false);
       document.body.style.overflow = '';
     }
   };
+
+  const FontToggle = ({ className }) => (
+    <div className={`font-toggle ${className || ''}`}>
+      <button className="font-trigger" onClick={() => setFontMenuOpen(!fontMenuOpen)} aria-label="Font size">
+        <span className="font-icon">Aa</span>
+      </button>
+      {fontMenuOpen && (
+        <div className="font-dropdown">
+          {FONT_SIZES.map(f => (
+            <button
+              key={f.key}
+              className={`font-option ${fontSize === f.key ? 'active' : ''}`}
+              onClick={() => { setFontSize(f.key); setFontMenuOpen(false); }}
+            >
+              <span className={`font-preview font-${f.key}`}>{f.label}</span>
+              <span className="font-label">{f.key}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <>
@@ -89,10 +124,13 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <button className="nav-cta">
-          <Play size={12} fill="currentColor" />
-          Listen Now
-        </button>
+        <div className="nav-right">
+          <FontToggle className="desktop-only" />
+          <button className="nav-cta">
+            <Play size={12} fill="currentColor" />
+            Listen Now
+          </button>
+        </div>
         <button className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Menu">
           <span /><span /><span />
         </button>
@@ -115,6 +153,20 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="panel-bottom">
+          <div className="panel-font-section">
+            <span className="panel-font-label">Text size</span>
+            <div className="panel-font-buttons">
+              {FONT_SIZES.map(f => (
+                <button
+                  key={f.key}
+                  className={`panel-font-btn ${fontSize === f.key ? 'active' : ''}`}
+                  onClick={() => setFontSize(f.key)}
+                >
+                  <span className={`font-preview font-${f.key}`}>A</span>
+                </button>
+              ))}
+            </div>
+          </div>
           <button className="panel-cta">Listen Now</button>
           <div className="panel-socials">
             <a href="#">IG</a><a href="#">TW</a><a href="#">YT</a><a href="#">TT</a>
