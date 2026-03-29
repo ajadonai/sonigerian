@@ -85,9 +85,9 @@
 .font-option:hover { background: rgba(244,239,231,0.04); color: var(--off-white); }
 .font-option.active { color: var(--bright-green); }
 .font-preview { font-family: var(--font-display); font-weight: 700; }
-.font-preview.font-small { font-size: 12px; }
-.font-preview.font-medium { font-size: 15px; }
-.font-preview.font-large { font-size: 19px; }
+.font-preview.font-small { font-size: 11px; }
+.font-preview.font-medium { font-size: 16px; }
+.font-preview.font-large { font-size: 22px; }
 .font-label { text-transform: capitalize; }
 .desktop-only { display: block; }
 .panel-font-section {

@@ -5,8 +5,8 @@ import './Navbar.css';
 
 const FONT_SIZES = [
   { label: 'A', key: 'small', size: '14px' },
-  { label: 'A', key: 'medium', size: '16px' },
-  { label: 'A', key: 'large', size: '18px' },
+  { label: 'A', key: 'medium', size: '17px' },
+  { label: 'A', key: 'large', size: '21px' },
 ];
 
 export default function Navbar() {
