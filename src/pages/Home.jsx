@@ -124,7 +124,7 @@ export default function Home() {
             <h2 className="section-title">Catch up</h2>
             <p className="section-sub">New episodes every week. Here's the freshest.</p>
           </div>
-          <Link to="/episodes" className="view-all-btn">View all {episodes.length} episodes <ArrowRight size={14} /></Link>
+          <Link to="/episodes" className="view-all-btn">View all <ArrowRight size={14} /></Link>
         </div>
         <div className="episodes-row">
           {latestEpisodes.map(ep => (

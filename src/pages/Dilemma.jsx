@@ -84,7 +84,7 @@ export default function Dilemma() {
       <RevealItem delay={0.1}>
         <div className="submit-dilemma">
           <h2>Got a dilemma?</h2>
-          <p>Send your hot takes, dilemmas and gist to Dami and Isaac.</p>
+          <p>Big problem, small problem, or problem wey you create by yourself 😭... we accept all! Fill the form sharp sharp 📝🔥</p>
           <form className="dilemma-form" onSubmit={async (e) => {
             e.preventDefault();
             setSending(true);
