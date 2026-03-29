@@ -57,6 +57,7 @@
   font-weight: 600; font-size: 13px;
   text-transform: uppercase; letter-spacing: 2px;
   transition: all 0.3s;
+  margin: 0 auto;
 }
 .submit-dilemma-btn:hover {
   background: #4bc46a; transform: translateY(-2px);
