@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Play } from 'lucide-react';
 import './Navbar.css';
 
@@ -7,6 +7,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -19,41 +20,72 @@ export default function Navbar() {
     document.body.style.overflow = '';
   }, [location]);
 
+  // Handle hash scrolling after navigation
+  useEffect(() => {
+    if (location.hash && location.pathname === '/') {
+      setTimeout(() => {
+        const el = document.querySelector(location.hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [location]);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
     document.body.style.overflow = !menuOpen ? 'hidden' : '';
   };
 
   const navLinks = [
-    { to: '/', label: 'Home', hash: '' },
-    { to: '/#about', label: 'About', hash: '#about' },
-    { to: '/episodes', label: 'Episodes' },
-    { to: '/dilemma', label: 'Dilemma' },
-    { to: '/#contact', label: 'Contact', hash: '#contact' },
+    { label: 'Home', path: '/', hash: '#home' },
+    { label: 'About', path: '/', hash: '#about' },
+    { label: 'Episodes', path: '/episodes' },
+    { label: 'Dilemma', path: '/dilemma' },
+    { label: 'Contact', path: '/', hash: '#contact' },
   ];
 
-  const handleHashClick = (e, hash) => {
-    if (hash && location.pathname === '/') {
-      e.preventDefault();
-      const el = document.querySelector(hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (e, link) => {
+    e.preventDefault();
+
+    if (link.hash) {
+      if (location.pathname === '/') {
+        // Already on homepage — just scroll
+        const el = document.querySelector(link.hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        else if (link.hash === '#home') window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Navigate to homepage first, then scroll after render
+        navigate('/' + link.hash);
+      }
+    } else {
+      navigate(link.path);
+    }
+
+    if (menuOpen) {
+      setMenuOpen(false);
+      document.body.style.overflow = '';
     }
   };
 
   return (
     <>
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-        <Link to="/" className="nav-logo">So<span>Nigerian</span></Link>
+        <a href="/" className="nav-logo" onClick={(e) => { e.preventDefault(); if (location.pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); else navigate('/'); }}>
+          So<span>Nigerian</span>
+        </a>
         <ul className="nav-links">
           {navLinks.map(link => (
             <li key={link.label}>
-              <Link
-                to={link.to}
-                className={location.pathname === link.to ? 'active' : ''}
-                onClick={(e) => link.hash && handleHashClick(e, link.hash)}
+              <a
+                href={link.hash ? '/' + link.hash : link.path}
+                className={
+                  link.path === '/episodes' && location.pathname.startsWith('/episodes') ? 'active' :
+                  link.path === '/dilemma' && location.pathname === '/dilemma' ? 'active' :
+                  link.path === '/' && !link.hash && location.pathname === '/' ? 'active' : ''
+                }
+                onClick={(e) => handleNavClick(e, link)}
               >
                 {link.label}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
@@ -74,10 +106,10 @@ export default function Navbar() {
           <ul className="panel-nav">
             {navLinks.map((link, i) => (
               <li key={link.label} style={{ '--delay': `${0.1 + i * 0.05}s` }}>
-                <Link to={link.to} onClick={(e) => link.hash && handleHashClick(e, link.hash)}>
+                <a href={link.hash ? '/' + link.hash : link.path} onClick={(e) => handleNavClick(e, link)}>
                   <span>{link.label}</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9,6 15,12 9,18" /></svg>
-                </Link>
+                </a>
               </li>
             ))}
           </ul>

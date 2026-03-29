@@ -330,9 +330,9 @@
 
 /* ═══ RESPONSIVE — TABLET ═══ */
 @media (max-width: 1024px) {
-  .hero { grid-template-columns: 1fr; min-height: auto; }
-  .hero-left { padding: 100px 48px 48px; order: 2; }
-  .hero-right { height: 40vh; min-height: 300px; order: 1; }
+  .hero { grid-template-columns: 1fr; min-height: 100vh; }
+  .hero-left { padding: 40px 48px 40px; order: 2; }
+  .hero-right { height: 35vh; min-height: 220px; order: 1; }
   .hero-image-overlay {
     background: linear-gradient(to top, var(--charcoal) 0%, rgba(46,42,40,0.3) 50%, transparent 100%);
   }
@@ -349,8 +349,9 @@
 
 /* ═══ RESPONSIVE — MOBILE ═══ */
 @media (max-width: 640px) {
-  .hero-left { padding: 32px 20px 40px; }
-  .hero-right { height: 35vh; min-height: 240px; }
+  .hero { min-height: 100vh; }
+  .hero-left { padding: 24px 20px 32px; }
+  .hero-right { height: 30vh; min-height: 180px; }
   .hero-eyebrow { margin-bottom: 16px; }
   .eyebrow-line { width: 24px; }
   .hero-title { font-size: clamp(36px, 11vw, 48px); margin-bottom: 16px; }
