@@ -1,13 +1,16 @@
 /* ═══ HERO ═══ */
 .hero {
-  min-height: 100dvh;
+  height: 100dvh;
   display: grid; grid-template-columns: 1fr 1fr;
   background: var(--charcoal);
+  overflow: hidden;
 }
 .hero-left {
   display: flex; flex-direction: column; justify-content: center;
   padding: 80px 72px 48px;
   position: relative; z-index: 3;
+  overflow-y: auto;
+  min-height: 0;
 }
 .hero-eyebrow, .eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
 .eyebrow-line { width: 48px; height: 1.5px; background: var(--bright-green); }
@@ -331,7 +334,7 @@
 /* ═══ RESPONSIVE — TABLET ═══ */
 @media (max-width: 1024px) {
   .hero { grid-template-columns: 1fr; height: 100dvh; min-height: 0; grid-template-rows: 28vh 1fr; overflow: hidden; }
-  .hero-left { padding: 20px 48px 24px; order: 2; justify-content: flex-start; }
+  .hero-left { padding: 20px 48px 24px; order: 2; justify-content: flex-start; overflow-y: auto; }
   .hero-right { min-height: 0; order: 1; }
   .hero-image-overlay {
     background: linear-gradient(to top, var(--charcoal) 0%, rgba(46,42,40,0.3) 50%, transparent 100%);
