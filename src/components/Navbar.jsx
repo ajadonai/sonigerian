@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Play } from 'lucide-react';
+import { siteConfig } from '../data/placeholder';
 import './Navbar.css';
 
 const FONT_SIZES = [

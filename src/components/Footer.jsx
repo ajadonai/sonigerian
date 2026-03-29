@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { siteConfig } from '../data/placeholder';
 import './Footer.css';
 
 export default function Footer() {
@@ -13,11 +14,12 @@ export default function Footer() {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/episodes">Episodes</Link></li>
           <li><Link to="/dilemma">Dilemma</Link></li>
+          <li><a href={siteConfig.podLink} target="_blank" rel="noopener noreferrer">Listen</a></li>
         </ul>
         <div className="footer-socials">
-          <a href="https://instagram.com/sonigerian_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-          <a href="https://twitter.com/sonigerian_" target="_blank" rel="noopener noreferrer" aria-label="Twitter">TW</a>
-          <a href="https://youtube.com/@sonigerianpodcast" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YT</a>
+          <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer">IG</a>
+          <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer">TW</a>
+          <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer">YT</a>
         </div>
       </div>
       <div className="footer-bottom">
