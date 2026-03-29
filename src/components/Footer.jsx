@@ -14,11 +14,11 @@ export default function Footer() {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/episodes">Episodes</Link></li>
           <li><Link to="/dilemma">Dilemma</Link></li>
-          <li><a href={siteConfig.podLink} target="_blank" rel="noopener noreferrer">Listen</a></li>
+          <li><Link to="/listen">Listen</Link></li>
         </ul>
         <div className="footer-socials">
           <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer">IG</a>
-          <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer">TW</a>
+          <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer">X</a>
           <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer">YT</a>
         </div>
       </div>

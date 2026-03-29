@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Episodes from './pages/Episodes';
 import EpisodeDetail from './pages/EpisodeDetail';
 import Dilemma from './pages/Dilemma';
+import Listen from './pages/Listen';
 import NotFound from './pages/NotFound';
 import Admin from './admin/Admin';
 
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/episodes" element={<PublicLayout><Episodes /></PublicLayout>} />
         <Route path="/episodes/:slug" element={<PublicLayout><EpisodeDetail /></PublicLayout>} />
         <Route path="/dilemma" element={<PublicLayout><Dilemma /></PublicLayout>} />
+        <Route path="/listen" element={<PublicLayout><Listen /></PublicLayout>} />
         <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
       </Routes>

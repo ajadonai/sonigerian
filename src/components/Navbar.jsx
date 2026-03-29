@@ -138,7 +138,7 @@ export default function Navbar() {
         </ul>
         <div className="nav-right">
           <FontToggle className="desktop-only" />
-          <a href="https://pod.link/sonigerian" target="_blank" rel="noopener noreferrer" className="nav-cta">
+          <a href="/listen" className="nav-cta" onClick={(e) => { e.preventDefault(); navigate('/listen'); }}>
             <Play size={12} fill="currentColor" />
             Listen Now
           </a>
@@ -179,10 +179,10 @@ export default function Navbar() {
               ))}
             </div>
           </div>
-          <a href="https://pod.link/sonigerian" target="_blank" rel="noopener noreferrer" className="panel-cta">Listen Now</a>
+          <a href="/listen" className="panel-cta" onClick={(e) => { e.preventDefault(); navigate('/listen'); setMenuOpen(false); document.body.style.overflow = ''; }}>Listen Now</a>
           <div className="panel-socials">
             <a href="https://instagram.com/sonigerian_" target="_blank" rel="noopener noreferrer">IG</a>
-            <a href="https://twitter.com/sonigerian_" target="_blank" rel="noopener noreferrer">TW</a>
+            <a href="https://x.com/sonigerian_" target="_blank" rel="noopener noreferrer">X</a>
             <a href="https://youtube.com/@sonigerianpodcast" target="_blank" rel="noopener noreferrer">YT</a>
           </div>
         </div>

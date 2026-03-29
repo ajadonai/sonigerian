@@ -75,6 +75,14 @@ export default function Dilemma() {
           ))}
         </div>
       )}
+
+      <RevealItem delay={0.1}>
+        <div className="submit-dilemma">
+          <h2>Got a dilemma?</h2>
+          <p>Submit your own scenario and it might be featured on the next episode.</p>
+          <a href="https://forms.gle/LKG8XM4v2yrax5dj9" target="_blank" rel="noopener noreferrer" className="submit-dilemma-btn">Submit a dilemma</a>
+        </div>
+      </RevealItem>
     </main>
   );
 }

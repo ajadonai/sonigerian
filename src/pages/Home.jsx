@@ -107,6 +107,10 @@ export default function Home() {
                 <h3>{host.name}</h3>
                 <span className="host-role">{host.role}</span>
                 <p>{host.bio}</p>
+                <div className="host-socials">
+                  {host.twitter && <a href={host.twitter} target="_blank" rel="noopener noreferrer" className="host-social-link">X</a>}
+                  {host.instagram && <a href={host.instagram} target="_blank" rel="noopener noreferrer" className="host-social-link">IG</a>}
+                </div>
               </div>
             </div>
           ))}
@@ -198,9 +202,9 @@ export default function Home() {
           <h3>Follow the conversation</h3>
           <p>We're most active on social media. Follow us for behind-the-scenes content, polls, and community banter.</p>
           <div className="contact-socials">
-            <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer">Twitter / X</a>
-            <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer"><span className="social-label">Instagram</span><span className="social-handle">@sonigerian_</span></a>
+            <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer"><span className="social-label">Twitter / X</span><span className="social-handle">@sonigerian_</span></a>
+            <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer"><span className="social-label">YouTube</span><span className="social-handle">So Nigerian</span></a>
           </div>
           <div className="contact-email">
             <h3>Or email us</h3>
