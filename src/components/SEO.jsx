@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 const DEFAULTS = {
   title: 'So Nigerian — Podcast with Dami Aros & Isaac',
   description: 'Bold social commentary podcast unpacking pop culture, relationships, Japa struggles, and everyday Nigerian life.',
-  image: '/og-image.png',
+  image: '/hosts.png',
   url: 'https://sonigerian.vercel.app',
 };
 

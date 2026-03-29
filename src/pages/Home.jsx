@@ -62,7 +62,7 @@ export default function Home() {
           </div>
           <div className="hero-right">
             <div className="hero-image-container">
-              <div className="hero-image-placeholder"><span>HOST PHOTO</span></div>
+              <img className="hero-image" src="/hosts.png" alt="Dami Aros and Isaac — So Nigerian Podcast hosts" />
               <div className="hero-image-overlay" />
             </div>
             <div className="hero-decorator top-accent" />
