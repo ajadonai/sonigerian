@@ -136,12 +136,12 @@
 .marquee-dot { width: 4px; height: 4px; background: var(--bright-green); border-radius: 50%; flex-shrink: 0; }
 
 /* ═══ FEATURED ═══ */
-.featured-strip { padding: 0 56px; position: relative; z-index: 2; }
+.featured-strip { padding: 24px 56px; position: relative; z-index: 2; }
 .featured-inner {
   display: grid; grid-template-columns: auto 1fr auto;
   align-items: center; gap: 32px; padding: 28px 36px;
   background: var(--card-bg); border: 1px solid var(--card-border);
-  border-radius: 8px; transform: translateY(-32px);
+  border-radius: 8px;
 }
 .featured-label { display: flex; align-items: center; gap: 10px; }
 .featured-dot { width: 8px; height: 8px; background: var(--bright-green); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
@@ -384,8 +384,8 @@
   .platform-badges { gap: 6px; left: 12px; top: 12px; }
   .platform-badge { padding: 5px 10px; font-size: 8px; }
 
-  .featured-strip { padding: 0 20px; }
-  .featured-inner { grid-template-columns: 1fr; gap: 12px; transform: translateY(-20px); padding: 18px 20px; }
+  .featured-strip { padding: 16px 20px; }
+  .featured-inner { grid-template-columns: 1fr; gap: 12px; padding: 18px 20px; }
   .featured-play { width: 100%; justify-content: center; }
 
   .episodes-section, .about-section, .contact-section, .dilemma-section { padding: 48px 20px; }
