@@ -1,10 +1,21 @@
 import { useState } from 'react';
 import { dilemmas } from '../data/placeholder';
 import SEO from '../components/SEO';
+import { useReveal } from '../lib/useReveal';
 import './Dilemma.css';
+
+function RevealItem({ children, delay = 0 }) {
+  const [ref, visible] = useReveal(0.1);
+  return (
+    <div ref={ref} className={`reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: `${delay}s` }}>
+      {children}
+    </div>
+  );
+}
 
 export default function Dilemma() {
   const [votes, setVotes] = useState({});
+  const [headerRef, headerVisible] = useReveal();
   const activeDilemma = dilemmas.find(d => d.active);
   const pastDilemmas = dilemmas.filter(d => !d.active);
 
@@ -39,18 +50,29 @@ export default function Dilemma() {
   return (
     <main className="dilemma-page">
       <SEO title="The Dilemma" description="What would you do? Vote on weekly dilemma scenarios." path="/dilemma" />
-      <div className="dilemma-page-header">
+
+      <div className={`dilemma-page-header reveal ${headerVisible ? 'visible' : ''}`} ref={headerRef}>
         <div className="eyebrow"><div className="eyebrow-line" /><span>The Dilemma</span></div>
         <h1 className="page-title">What would you do?</h1>
         <p className="page-sub">We put you on the spot every week. No right answers. Pick your side.</p>
       </div>
 
-      {activeDilemma && renderDilemma(activeDilemma, true)}
+      {activeDilemma && (
+        <RevealItem delay={0.1}>
+          {renderDilemma(activeDilemma, true)}
+        </RevealItem>
+      )}
 
       {pastDilemmas.length > 0 && (
         <div className="past-section">
-          <h2 className="past-heading">Past dilemmas</h2>
-          {pastDilemmas.map(d => renderDilemma(d, false))}
+          <RevealItem delay={0}>
+            <h2 className="past-heading">Past dilemmas</h2>
+          </RevealItem>
+          {pastDilemmas.map((d, i) => (
+            <RevealItem key={d.id} delay={Math.min((i + 1) * 0.1, 0.3)}>
+              {renderDilemma(d, false)}
+            </RevealItem>
+          ))}
         </div>
       )}
     </main>
