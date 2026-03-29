@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
 import { dilemmas } from '../data/placeholder';
-import { EMAILJS_CONFIG } from '../lib/emailjs';
 import SEO from '../components/SEO';
+import Toast from '../components/Toast';
 import { useReveal } from '../lib/useReveal';
 import './Dilemma.css';
 
@@ -21,11 +20,32 @@ export default function Dilemma() {
   const [dilemmaForm, setDilemmaForm] = useState({ name: '', gist: '' });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [toast, setToast] = useState({ visible: false, message: '', type: 'success' });
   const activeDilemma = dilemmas.find(d => d.active);
   const pastDilemmas = dilemmas.filter(d => !d.active);
 
   const handleVote = (dilemmaId, label) => {
     setVotes(prev => ({ ...prev, [dilemmaId]: label }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSending(true);
+    try {
+      const res = await fetch('/api/submit-dilemma', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: dilemmaForm.name, gist: dilemmaForm.gist }),
+      });
+      if (!res.ok) throw new Error();
+      setSubmitted(true);
+      setDilemmaForm({ name: '', gist: '' });
+      setToast({ visible: true, message: 'Submitted! We might just use yours next week 🔥', type: 'success' });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err) {
+      setToast({ visible: true, message: 'Something went wrong. Try the Google Form below.', type: 'error' });
+    }
+    setSending(false);
   };
 
   const renderDilemma = (d, isActive) => {
@@ -85,28 +105,7 @@ export default function Dilemma() {
         <div className="submit-dilemma">
           <h2>Got a dilemma?</h2>
           <p>Big problem, small problem, or problem wey you create by yourself 😭... we accept all! Fill the form sharp sharp 📝🔥</p>
-          <form className="dilemma-form" onSubmit={async (e) => {
-            e.preventDefault();
-            setSending(true);
-            try {
-              await emailjs.send(
-                EMAILJS_CONFIG.serviceId,
-                EMAILJS_CONFIG.templateId,
-                {
-                  from_name: dilemmaForm.name,
-                  message: dilemmaForm.gist,
-                  to_email: 'SoNigerian@eggcorndigital.com',
-                },
-                EMAILJS_CONFIG.publicKey
-              );
-              setSubmitted(true);
-              setDilemmaForm({ name: '', gist: '' });
-              setTimeout(() => setSubmitted(false), 5000);
-            } catch (err) {
-              alert('Something went wrong. Try the Google Form below.');
-            }
-            setSending(false);
-          }}>
+          <form className="dilemma-form" onSubmit={handleSubmit}>
             <div className="df-field">
               <label>Name <span className="df-hint">(preferably a nickname or fake name)</span></label>
               <input
@@ -137,6 +136,13 @@ export default function Dilemma() {
           <a href="https://forms.gle/LKG8XM4v2yrax5dj9" target="_blank" rel="noopener noreferrer" className="df-fallback">Having issues? Submit via Google Form</a>
         </div>
       </RevealItem>
+
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        visible={toast.visible}
+        onClose={() => setToast({ ...toast, visible: false })}
+      />
     </main>
   );
 }
