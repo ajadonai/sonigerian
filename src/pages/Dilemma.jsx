@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { dilemmas } from '../data/placeholder';
+import SEO from '../components/SEO';
 import './Dilemma.css';
 
 export default function Dilemma() {
@@ -37,6 +38,7 @@ export default function Dilemma() {
 
   return (
     <main className="dilemma-page">
+      <SEO title="The Dilemma" description="What would you do? Vote on weekly dilemma scenarios." path="/dilemma" />
       <div className="dilemma-page-header">
         <div className="eyebrow"><div className="eyebrow-line" /><span>The Dilemma</span></div>
         <h1 className="page-title">What would you do?</h1>

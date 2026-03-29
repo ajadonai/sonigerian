@@ -2,10 +2,13 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import BackToTop from './components/BackToTop';
+import PageTransition from './components/PageTransition';
 import Home from './pages/Home';
 import Episodes from './pages/Episodes';
 import EpisodeDetail from './pages/EpisodeDetail';
 import Dilemma from './pages/Dilemma';
+import NotFound from './pages/NotFound';
 import Admin from './admin/Admin';
 
 function ScrollToTop() {
@@ -20,8 +23,9 @@ function PublicLayout({ children }) {
   return (
     <>
       <Navbar />
-      {children}
+      <PageTransition>{children}</PageTransition>
       <Footer />
+      <BackToTop />
     </>
   );
 }
@@ -36,6 +40,7 @@ export default function App() {
         <Route path="/episodes/:slug" element={<PublicLayout><EpisodeDetail /></PublicLayout>} />
         <Route path="/dilemma" element={<PublicLayout><Dilemma /></PublicLayout>} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
       </Routes>
     </BrowserRouter>
   );

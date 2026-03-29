@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Play, ArrowRight, Send, ChevronRight } from 'lucide-react';
 import { episodes, dilemmas, siteConfig } from '../data/placeholder';
+import SEO from '../components/SEO';
 import './Home.css';
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
 
   return (
     <main>
+      <SEO />
       <section className="hero" id="home">
         <div className="hero-grid">
           <div className="hero-left">

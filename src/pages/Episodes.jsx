@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Play } from 'lucide-react';
 import { episodes, allTags } from '../data/placeholder';
+import SEO from '../components/SEO';
 import './Episodes.css';
 
 const PER_PAGE = 12;
@@ -27,6 +28,7 @@ export default function Episodes() {
 
   return (
     <main className="episodes-page">
+      <SEO title="Episodes" description="Browse all episodes of the So Nigerian podcast." path="/episodes" />
       <div className="episodes-page-header">
         <div className="eyebrow"><div className="eyebrow-line" /><span>All Episodes</span></div>
         <h1 className="page-title">The archive</h1>

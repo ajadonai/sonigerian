@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Play, Share2 } from 'lucide-react';
 import { episodes } from '../data/placeholder';
+import SEO from '../components/SEO';
 import './EpisodeDetail.css';
 
 export default function EpisodeDetail() {
@@ -9,10 +10,11 @@ export default function EpisodeDetail() {
   const currentIndex = episodes.findIndex(e => e.slug === slug);
   const nextEpisodes = episodes.slice(currentIndex + 1, currentIndex + 3);
 
-  if (!episode) return <main className="episode-detail"><div className="not-found"><p>Episode not found.</p><Link to="/episodes">Back to episodes</Link></div></main>;
+  if (!episode) return <main className="episode-detail"><SEO title="Episode Not Found" /><div className="not-found"><p>Episode not found.</p><Link to="/episodes">Back to episodes</Link></div></main>;
 
   return (
     <main className="episode-detail">
+      <SEO title={`EP ${episode.number}: ${episode.title}`} description={episode.description} path={`/episodes/${episode.slug}`} />
       <Link to="/episodes" className="back-link"><ArrowLeft size={16} /> Back to episodes</Link>
 
       <div className="detail-hero">
