@@ -1,12 +1,12 @@
 /* ═══ HERO ═══ */
 .hero {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: grid; grid-template-columns: 1fr 1fr;
   background: var(--charcoal);
 }
 .hero-left {
   display: flex; flex-direction: column; justify-content: center;
-  padding: 140px 72px 80px;
+  padding: 80px 72px 48px;
   position: relative; z-index: 3;
 }
 .hero-eyebrow, .eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
@@ -330,9 +330,9 @@
 
 /* ═══ RESPONSIVE — TABLET ═══ */
 @media (max-width: 1024px) {
-  .hero { grid-template-columns: 1fr; min-height: 100vh; }
+  .hero { grid-template-columns: 1fr; min-height: 100dvh; grid-template-rows: 30vh 1fr; }
   .hero-left { padding: 40px 48px 40px; order: 2; }
-  .hero-right { height: 35vh; min-height: 220px; order: 1; }
+  .hero-right { min-height: 0; order: 1; }
   .hero-image-overlay {
     background: linear-gradient(to top, var(--charcoal) 0%, rgba(46,42,40,0.3) 50%, transparent 100%);
   }
@@ -349,9 +349,9 @@
 
 /* ═══ RESPONSIVE — MOBILE ═══ */
 @media (max-width: 640px) {
-  .hero { min-height: 100vh; }
+  .hero { min-height: 100dvh; grid-template-rows: 25vh 1fr; }
   .hero-left { padding: 24px 20px 32px; }
-  .hero-right { height: 30vh; min-height: 180px; }
+  .hero-right { min-height: 0; }
   .hero-eyebrow { margin-bottom: 16px; }
   .eyebrow-line { width: 24px; }
   .hero-title { font-size: clamp(36px, 11vw, 48px); margin-bottom: 16px; }
