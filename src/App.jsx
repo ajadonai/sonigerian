@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
@@ -10,14 +9,6 @@ import EpisodeDetail from './pages/EpisodeDetail';
 import Dilemma from './pages/Dilemma';
 import NotFound from './pages/NotFound';
 import Admin from './admin/Admin';
-
-function ScrollToTop() {
-  const { pathname, hash } = useLocation();
-  useEffect(() => {
-    if (!hash) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  }, [pathname]);
-  return null;
-}
 
 function PublicLayout({ children }) {
   return (
@@ -33,7 +24,6 @@ function PublicLayout({ children }) {
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
       <Routes>
         <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
         <Route path="/episodes" element={<PublicLayout><Episodes /></PublicLayout>} />
