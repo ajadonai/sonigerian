@@ -327,6 +327,7 @@
   .hero-grid { grid-template-columns: 1fr; grid-template-rows: 35vh 1fr; }
   .hero-left { padding: 20px 48px 16px; order: 2; justify-content: flex-start; }
   .hero-right { min-height: 0; order: 1; }
+  .hero-image { object-position: center 25%; }
   .hero-image-overlay {
     background: linear-gradient(to top, var(--charcoal) 0%, rgba(46,42,40,0.3) 50%, transparent 100%);
   }
@@ -350,6 +351,7 @@
   .hero-grid { grid-template-rows: 32vh 1fr; }
   .hero-left { padding: 12px 20px 12px; }
   .hero-right { min-height: 0; }
+  .hero-image { object-position: center 20%; }
   .hero-eyebrow { margin-bottom: 10px; }
   .eyebrow-line { width: 24px; }
   .hero-title { font-size: clamp(32px, 10vw, 44px); margin-bottom: 10px; }
