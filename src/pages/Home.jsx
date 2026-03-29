@@ -48,16 +48,8 @@ export default function Home() {
             </div>
             <div className="hero-stats">
               <div className="stat-item">
-                <div className="stat-num">{formatNumber(siteConfig.stats.totalPlays)}<span>+</span></div>
-                <div className="stat-label">Total Plays</div>
-              </div>
-              <div className="stat-item">
                 <div className="stat-num">{episodes.length}<span>+</span></div>
                 <div className="stat-label">Episodes</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-num">{siteConfig.stats.countries}</div>
-                <div className="stat-label">Countries</div>
               </div>
               <div className="stat-item">
                 <div className="stat-num">#1</div>

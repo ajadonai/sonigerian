@@ -165,6 +165,7 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="panel-bottom">
+          <a href="/listen" className="panel-cta" onClick={(e) => { e.preventDefault(); navigate('/listen'); setMenuOpen(false); document.body.style.overflow = ''; }}>Listen Now</a>
           <div className="panel-font-section">
             <span className="panel-font-label">Text size</span>
             <div className="panel-font-buttons">
@@ -179,7 +180,6 @@ export default function Navbar() {
               ))}
             </div>
           </div>
-          <a href="/listen" className="panel-cta" onClick={(e) => { e.preventDefault(); navigate('/listen'); setMenuOpen(false); document.body.style.overflow = ''; }}>Listen Now</a>
           <div className="panel-socials">
             <a href="https://instagram.com/sonigerian_" target="_blank" rel="noopener noreferrer">IG</a>
             <a href="https://x.com/sonigerian_" target="_blank" rel="noopener noreferrer">X</a>
