@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom';
 import { Play, ArrowRight, Send, ChevronRight } from 'lucide-react';
 import { episodes, dilemmas, siteConfig } from '../data/placeholder';
 import SEO from '../components/SEO';
+import { useReveal } from '../lib/useReveal';
 import './Home.css';
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [selectedOption, setSelectedOption] = useState(null);
+  const [aboutRef, aboutVisible] = useReveal();
+  const [episodesRef, episodesVisible] = useReveal();
+  const [dilemmaRef, dilemmaVisible] = useReveal();
+  const [contactRef, contactVisible] = useReveal();
   const latestEpisodes = episodes.slice(0, 4);
   const activeDilemma = dilemmas.find(d => d.active);
   const totalVotes = activeDilemma?.options.reduce((a, o) => a + o.votes, 0) || 0;
@@ -88,7 +93,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="about-section" id="about">
+      <section className={`about-section reveal ${aboutVisible ? 'visible' : ''}`} id="about" ref={aboutRef}>
         <div className="about-left">
           <div className="eyebrow"><div className="eyebrow-line" /><span>About the Show</span></div>
           <h2 className="section-title">Stories that hit different.</h2>
@@ -108,7 +113,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="episodes-section">
+      <section className={`episodes-section reveal ${episodesVisible ? 'visible' : ''}`} ref={episodesRef}>
         <div className="section-header">
           <div>
             <div className="eyebrow"><div className="eyebrow-line" /><span>Latest Episodes</span></div>
@@ -138,7 +143,7 @@ export default function Home() {
       </section>
 
       {activeDilemma && (
-        <section className="dilemma-section">
+        <section className={`dilemma-section reveal ${dilemmaVisible ? 'visible' : ''}`} ref={dilemmaRef}>
           <div className="dilemma-header">
             <div className="eyebrow"><div className="eyebrow-line" /><span>The Dilemma</span></div>
             <h2 className="section-title">What would you do?</h2>
@@ -168,7 +173,7 @@ export default function Home() {
         </section>
       )}
 
-      <section className="contact-section" id="contact">
+      <section className={`contact-section reveal ${contactVisible ? 'visible' : ''}`} id="contact" ref={contactRef}>
         <div className="contact-left">
           <div className="eyebrow"><div className="eyebrow-line" /><span>Get In Touch</span></div>
           <h2 className="section-title">Say something.</h2>

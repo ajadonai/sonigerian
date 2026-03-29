@@ -1,7 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Play, Share2 } from 'lucide-react';
+import { ArrowLeft, Play } from 'lucide-react';
 import { episodes } from '../data/placeholder';
 import SEO from '../components/SEO';
+import ShareButton from '../components/ShareButton';
 import './EpisodeDetail.css';
 
 export default function EpisodeDetail() {
@@ -30,9 +31,14 @@ export default function EpisodeDetail() {
           </div>
           <p className="detail-desc">{episode.description}</p>
           <div className="detail-platforms">
-            <a href={episode.audioLink} target="_blank" rel="noopener noreferrer" className="plat-btn">Apple Podcasts</a>
-            <a href="https://pod.link/sonigerian" target="_blank" rel="noopener noreferrer" className="plat-btn">All Platforms</a>
-            <button className="plat-btn share" onClick={() => { navigator.clipboard.writeText(window.location.href); }}><Share2 size={14} /></button>
+            <button className="plat-btn">Spotify</button>
+            <button className="plat-btn">Apple Podcasts</button>
+            <button className="plat-btn">YouTube</button>
+            <ShareButton
+              title={`EP ${episode.number}: ${episode.title} — So Nigerian`}
+              text={episode.description}
+              url={`https://sonigerian.vercel.app/episodes/${episode.slug}`}
+            />
           </div>
         </div>
       </div>
