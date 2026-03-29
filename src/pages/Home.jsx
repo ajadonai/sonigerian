@@ -102,7 +102,7 @@ export default function Home() {
         <div className="about-right">
           {siteConfig.hosts.map(host => (
             <div className="host-card" key={host.name}>
-              <div className="host-photo-placeholder">{host.name.split(' ').map(n => n[0]).join('')}</div>
+              <img className="host-photo" src={host.image} alt={host.name} />
               <div className="host-info">
                 <h3>{host.name}</h3>
                 <span className="host-role">{host.role}</span>
