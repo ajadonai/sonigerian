@@ -74,6 +74,34 @@
 .form-field input:focus, .form-field textarea:focus { border-color: var(--bright-green); }
 .form-field select { cursor: pointer; }
 
+/* TAG SELECTOR */
+.tag-selector { display: flex; flex-direction: column; gap: 10px; }
+.tag-options { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-opt {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; padding: 6px 14px; border-radius: 100px;
+  border: 1px solid rgba(244,239,231,0.1); background: transparent;
+  color: var(--text-muted); font-weight: 500; transition: all 0.2s;
+}
+.tag-opt:hover { border-color: rgba(63,174,90,0.4); color: var(--text-secondary); }
+.tag-opt.selected { background: var(--bright-green); color: var(--charcoal); border-color: var(--bright-green); font-weight: 600; }
+.tag-custom {
+  display: flex; gap: 6px; align-items: center;
+}
+.tag-custom input {
+  flex: 1; padding: 8px 12px; border-radius: 6px;
+  border: 1px solid rgba(244,239,231,0.08); background: rgba(244,239,231,0.03);
+  color: var(--off-white); font-size: 12px; font-family: var(--font-body); outline: none;
+}
+.tag-custom input:focus { border-color: var(--bright-green); }
+.tag-add-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 6px;
+  background: rgba(63,174,90,0.1); border: 1px solid rgba(63,174,90,0.2);
+  color: var(--bright-green); transition: all 0.2s;
+}
+.tag-add-btn:hover { background: var(--bright-green); color: var(--charcoal); }
+
 /* DILEMMA ADMIN */
 .admin-dilemma-card { background: var(--card-bg); border: 1px solid rgba(63,174,90,0.15); border-radius: 10px; padding: 24px; }
 .ad-badge { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }

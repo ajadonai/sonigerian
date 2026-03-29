@@ -4,10 +4,12 @@ import { Search, Play } from 'lucide-react';
 import { episodes, allTags } from '../data/placeholder';
 import './Episodes.css';
 
+const PER_PAGE = 12;
+
 export default function Episodes() {
   const [search, setSearch] = useState('');
   const [activeTag, setActiveTag] = useState('All');
-  const [visibleCount, setVisibleCount] = useState(15);
+  const [visibleCount, setVisibleCount] = useState(PER_PAGE);
 
   const filtered = episodes.filter(ep => {
     const matchSearch = ep.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -17,6 +19,11 @@ export default function Episodes() {
   });
 
   const visible = filtered.slice(0, visibleCount);
+
+  const handleTagChange = (tag) => {
+    setActiveTag(tag);
+    setVisibleCount(PER_PAGE);
+  };
 
   return (
     <main className="episodes-page">
@@ -29,15 +36,19 @@ export default function Episodes() {
       <div className="episodes-controls">
         <div className="search-box">
           <Search size={16} />
-          <input type="text" placeholder="Search episodes..." value={search} onChange={e => setSearch(e.target.value)} />
+          <input type="text" placeholder="Search episodes..." value={search} onChange={e => { setSearch(e.target.value); setVisibleCount(PER_PAGE); }} />
         </div>
         <div className="tag-filters">
           {allTags.map(tag => (
-            <button key={tag} className={`filter-btn ${activeTag === tag ? 'active' : ''}`} onClick={() => { setActiveTag(tag); setVisibleCount(15); }}>
+            <button key={tag} className={`filter-btn ${activeTag === tag ? 'active' : ''}`} onClick={() => handleTagChange(tag)}>
               {tag}
             </button>
           ))}
         </div>
+      </div>
+
+      <div className="episodes-count">
+        Showing {Math.min(visibleCount, filtered.length)} of {filtered.length} episodes
       </div>
 
       <div className="episodes-list">
@@ -61,14 +72,18 @@ export default function Episodes() {
       </div>
 
       {visible.length < filtered.length && (
-        <button className="load-more" onClick={() => setVisibleCount(v => v + 15)}>
-          Load more episodes
-        </button>
+        <div className="load-more-wrap">
+          <button className="load-more" onClick={() => setVisibleCount(v => v + PER_PAGE)}>
+            Load more episodes
+          </button>
+          <span className="load-more-count">{filtered.length - visible.length} remaining</span>
+        </div>
       )}
 
       {filtered.length === 0 && (
         <div className="no-results">
-          <p>No episodes found for "{search}"{activeTag !== 'All' ? ` in ${activeTag}` : ''}</p>
+          <p>No episodes found{search ? ` for "${search}"` : ''}{activeTag !== 'All' ? ` in ${activeTag}` : ''}</p>
+          <button className="reset-btn" onClick={() => { setSearch(''); setActiveTag('All'); }}>Clear filters</button>
         </div>
       )}
     </main>

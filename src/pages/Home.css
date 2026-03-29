@@ -135,29 +135,6 @@
 .marquee-item span { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 3px; color: rgba(244,239,231,0.7); }
 .marquee-dot { width: 4px; height: 4px; background: var(--bright-green); border-radius: 50%; flex-shrink: 0; }
 
-/* ═══ FEATURED ═══ */
-.featured-strip { padding: 24px 56px; position: relative; z-index: 2; }
-.featured-inner {
-  display: grid; grid-template-columns: auto 1fr auto;
-  align-items: center; gap: 32px; padding: 28px 36px;
-  background: var(--card-bg); border: 1px solid var(--card-border);
-  border-radius: 8px;
-}
-.featured-label { display: flex; align-items: center; gap: 10px; }
-.featured-dot { width: 8px; height: 8px; background: var(--bright-green); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
-.featured-label span { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--bright-green); }
-.featured-info { display: flex; align-items: center; gap: 20px; overflow: hidden; }
-.featured-ep-num { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--warm-sand); flex-shrink: 0; }
-.featured-ep-title { font-size: 14px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.featured-play {
-  display: flex; align-items: center; gap: 10px;
-  background: none; border: 1px solid rgba(244,239,231,0.15);
-  color: var(--off-white); padding: 10px 24px; border-radius: 4px;
-  font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
-  transition: all 0.3s; flex-shrink: 0;
-}
-.featured-play:hover { border-color: var(--bright-green); color: var(--bright-green); }
-
 /* ═══ EPISODES TEASER ═══ */
 .episodes-section { padding: 40px 56px 80px; }
 .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; }

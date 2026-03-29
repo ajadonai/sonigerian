@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { LayoutDashboard, Radio, Layers, FileText, Mail, Settings, LogOut, Plus, Edit, Trash2, RotateCcw, Archive } from 'lucide-react';
-import { episodes, dilemmas, siteConfig } from '../data/placeholder';
+import { LayoutDashboard, Radio, Layers, FileText, Mail, Settings, LogOut, Plus, Edit, Trash2, RotateCcw, Archive, X } from 'lucide-react';
+import { episodes, dilemmas, siteConfig, allTags } from '../data/placeholder';
 import './Admin.css';
 
 const ADMIN_USERS = [
@@ -13,6 +13,24 @@ export default function Admin() {
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
   const [loginError, setLoginError] = useState('');
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [customTag, setCustomTag] = useState('');
+  const [availableTags, setAvailableTags] = useState(allTags.filter(t => t !== 'All'));
+
+  const toggleTag = (tag) => {
+    setSelectedTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
+  };
+
+  const addCustomTag = () => {
+    const tag = customTag.trim();
+    if (tag && !availableTags.includes(tag)) {
+      setAvailableTags(prev => [...prev, tag]);
+      setSelectedTags(prev => [...prev, tag]);
+    } else if (tag && !selectedTags.includes(tag)) {
+      setSelectedTags(prev => [...prev, tag]);
+    }
+    setCustomTag('');
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -126,22 +144,34 @@ export default function Admin() {
               </div>
               <div className="form-row">
                 <div className="form-field"><label>Duration</label><input placeholder="42:15" /></div>
-                <div className="form-field"><label>Tags (comma separated)</label><input placeholder="Culture, Money, Lagos" /></div>
+                <div className="form-field">
+                  <label>Status</label>
+                  <select><option>Published</option><option>Draft</option></select>
+                </div>
+              </div>
+              <div className="form-field full">
+                <label>Tags</label>
+                <div className="tag-selector">
+                  <div className="tag-options">
+                    {availableTags.map(tag => (
+                      <button key={tag} type="button" className={`tag-opt ${selectedTags.includes(tag) ? 'selected' : ''}`} onClick={() => toggleTag(tag)}>
+                        {tag}
+                        {selectedTags.includes(tag) && <X size={10} />}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="tag-custom">
+                    <input placeholder="Add custom tag..." value={customTag} onChange={e => setCustomTag(e.target.value)} onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addCustomTag())} />
+                    <button type="button" className="tag-add-btn" onClick={addCustomTag}><Plus size={12} /></button>
+                  </div>
+                </div>
               </div>
               <div className="form-field full"><label>Description / Show notes</label><textarea placeholder="Write the episode description..." rows={4} /></div>
               <div className="form-row">
                 <div className="form-field"><label>Audio link</label><input placeholder="https://spotify.com/..." /></div>
                 <div className="form-field"><label>Thumbnail</label><input type="file" /></div>
               </div>
-              <div className="form-row">
-                <div className="form-field">
-                  <label>Status</label>
-                  <select><option>Published</option><option>Draft</option></select>
-                </div>
-                <div className="form-field" style={{ display: 'flex', alignItems: 'flex-end' }}>
-                  <button className="admin-add-btn"><Plus size={14} /> Save episode</button>
-                </div>
-              </div>
+              <button className="admin-add-btn" style={{ marginTop: 8 }}><Plus size={14} /> Save episode</button>
             </div>
           </div>
         )}

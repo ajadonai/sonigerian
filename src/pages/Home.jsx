@@ -19,65 +19,60 @@ export default function Home() {
 
   return (
     <main>
-      {/* ═══ HERO ═══ */}
       <section className="hero" id="home">
         <div className="hero-grid">
-        <div className="hero-left">
-          <div className="hero-eyebrow">
-            <div className="eyebrow-line" />
-            <span>With Dami Aros & Isaac</span>
+          <div className="hero-left">
+            <div className="hero-eyebrow">
+              <div className="eyebrow-line" />
+              <span>With Dami Aros & Isaac</span>
+            </div>
+            <h1 className="hero-title">
+              {siteConfig.heroTitle}<br />
+              <em><span className="accent">{siteConfig.heroTitleAccent}</span></em>
+            </h1>
+            <p className="hero-desc">{siteConfig.heroDescription}</p>
+            <div className="hero-actions">
+              <Link to={`/episodes/${episodes[0].slug}`} className="btn-listen">
+                <Play size={16} fill="currentColor" /> Latest Episode
+              </Link>
+              <Link to="/episodes" className="btn-episodes">
+                Browse All Episodes
+              </Link>
+            </div>
+            <div className="hero-stats">
+              <div className="stat-item">
+                <div className="stat-num">{formatNumber(siteConfig.stats.totalPlays)}<span>+</span></div>
+                <div className="stat-label">Total Plays</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-num">{episodes.length}<span>+</span></div>
+                <div className="stat-label">Episodes</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-num">{siteConfig.stats.countries}</div>
+                <div className="stat-label">Countries</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-num">#1</div>
+                <div className="stat-label">On Spotify NG</div>
+              </div>
+            </div>
           </div>
-          <h1 className="hero-title">
-            {siteConfig.heroTitle}<br />
-            <em><span className="accent">{siteConfig.heroTitleAccent}</span></em>
-          </h1>
-          <p className="hero-desc">{siteConfig.heroDescription}</p>
-          <div className="hero-actions">
-            <Link to={`/episodes/${episodes[0].slug}`} className="btn-listen">
-              <Play size={16} fill="currentColor" /> Latest Episode
-            </Link>
-            <Link to="/episodes" className="btn-episodes">
-              Browse All Episodes
-            </Link>
-          </div>
-          <div className="hero-stats">
-            <div className="stat-item">
-              <div className="stat-num">{formatNumber(siteConfig.stats.totalPlays)}<span>+</span></div>
-              <div className="stat-label">Total Plays</div>
+          <div className="hero-right">
+            <div className="hero-image-container">
+              <div className="hero-image-placeholder"><span>HOST PHOTO</span></div>
+              <div className="hero-image-overlay" />
             </div>
-            <div className="stat-item">
-              <div className="stat-num">{episodes.length}<span>+</span></div>
-              <div className="stat-label">Episodes</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-num">{siteConfig.stats.countries}</div>
-              <div className="stat-label">Countries</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-num">#1</div>
-              <div className="stat-label">On Spotify NG</div>
+            <div className="hero-decorator top-accent" />
+            <div className="hero-decorator corner-lines" />
+            <div className="hero-decorator floating-text">EST. 2020</div>
+            <div className="platform-badges">
+              <div className="platform-badge">Spotify</div>
+              <div className="platform-badge">Apple</div>
+              <div className="platform-badge">YouTube</div>
             </div>
           </div>
         </div>
-        <div className="hero-right">
-          <div className="hero-image-container">
-            <div className="hero-image-placeholder">
-              <span>HOST PHOTO</span>
-            </div>
-            <div className="hero-image-overlay" />
-          </div>
-          <div className="hero-decorator top-accent" />
-          <div className="hero-decorator corner-lines" />
-          <div className="hero-decorator floating-text">EST. 2020</div>
-          <div className="platform-badges">
-            <div className="platform-badge">Spotify</div>
-            <div className="platform-badge">Apple</div>
-            <div className="platform-badge">YouTube</div>
-          </div>
-        </div>
-        </div>
-
-        {/* Marquee inside hero */}
         <div className="marquee-strip">
           <div className="marquee-track">
             {[...Array(2)].map((_, rep) => (
@@ -92,24 +87,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ FEATURED EPISODE ═══ */}
-      <div className="featured-strip">
-        <div className="featured-inner">
-          <div className="featured-label">
-            <div className="featured-dot" />
-            <span>Now Playing</span>
-          </div>
-          <div className="featured-info">
-            <span className="featured-ep-num">EP {episodes[0].number}</span>
-            <span className="featured-ep-title">{episodes[0].title} — {episodes[0].description}</span>
-          </div>
-          <Link to={`/episodes/${episodes[0].slug}`} className="featured-play">
-            <Play size={12} fill="currentColor" /> Play
-          </Link>
+      <section className="about-section" id="about">
+        <div className="about-left">
+          <div className="eyebrow"><div className="eyebrow-line" /><span>About the Show</span></div>
+          <h2 className="section-title">Stories that hit different.</h2>
+          <p className="about-text">{siteConfig.aboutText}</p>
         </div>
-      </div>
+        <div className="about-right">
+          {siteConfig.hosts.map(host => (
+            <div className="host-card" key={host.name}>
+              <div className="host-photo-placeholder">{host.name.split(' ').map(n => n[0]).join('')}</div>
+              <div className="host-info">
+                <h3>{host.name}</h3>
+                <span className="host-role">{host.role}</span>
+                <p>{host.bio}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      {/* ═══ EPISODES TEASER ═══ */}
       <section className="episodes-section">
         <div className="section-header">
           <div>
@@ -139,28 +136,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ ABOUT ═══ */}
-      <section className="about-section" id="about">
-        <div className="about-left">
-          <div className="eyebrow"><div className="eyebrow-line" /><span>About the Show</span></div>
-          <h2 className="section-title">Stories that hit different.</h2>
-          <p className="about-text">{siteConfig.aboutText}</p>
-        </div>
-        <div className="about-right">
-          {siteConfig.hosts.map(host => (
-            <div className="host-card" key={host.name}>
-              <div className="host-photo-placeholder">{host.name.split(' ').map(n => n[0]).join('')}</div>
-              <div className="host-info">
-                <h3>{host.name}</h3>
-                <span className="host-role">{host.role}</span>
-                <p>{host.bio}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ═══ DILEMMA PREVIEW ═══ */}
       {activeDilemma && (
         <section className="dilemma-section">
           <div className="dilemma-header">
@@ -172,11 +147,7 @@ export default function Home() {
             <div className="dilemma-question">{activeDilemma.scenario}</div>
             <div className="dilemma-options">
               {activeDilemma.options.map(opt => (
-                <div
-                  key={opt.label}
-                  className={`dilemma-opt ${selectedOption === opt.label ? 'selected' : ''}`}
-                  onClick={() => setSelectedOption(opt.label)}
-                >
+                <div key={opt.label} className={`dilemma-opt ${selectedOption === opt.label ? 'selected' : ''}`} onClick={() => setSelectedOption(opt.label)}>
                   <div className="opt-letter">{opt.label}</div>
                   <span>{opt.text}</span>
                   {selectedOption && (
@@ -189,18 +160,13 @@ export default function Home() {
               ))}
             </div>
             <div className="dilemma-footer">
-              {selectedOption ? (
-                <span className="dilemma-total">{totalVotes.toLocaleString()} votes</span>
-              ) : (
-                <span className="dilemma-hint">Pick an option to see results</span>
-              )}
+              {selectedOption ? <span className="dilemma-total">{totalVotes.toLocaleString()} votes</span> : <span className="dilemma-hint">Pick an option to see results</span>}
               <Link to="/dilemma" className="dilemma-link">See all dilemmas <ChevronRight size={14} /></Link>
             </div>
           </div>
         </section>
       )}
 
-      {/* ═══ CONTACT ═══ */}
       <section className="contact-section" id="contact">
         <div className="contact-left">
           <div className="eyebrow"><div className="eyebrow-line" /><span>Get In Touch</span></div>

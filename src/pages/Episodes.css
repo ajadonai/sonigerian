@@ -46,15 +46,25 @@
 .ep-list-item:hover .ep-list-play { border-color: var(--bright-green); color: var(--bright-green); }
 
 .load-more {
-  display: block; margin: 32px auto 0;
+  display: block;
   font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
   color: var(--bright-green); border: 1px solid rgba(63,174,90,0.3);
   padding: 12px 32px; border-radius: 4px; background: none;
   transition: all 0.3s;
 }
 .load-more:hover { background: rgba(63,174,90,0.1); }
+.load-more-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 32px; }
+.load-more-count { font-size: 11px; color: var(--text-muted); }
+
+.episodes-count { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
 
 .no-results { text-align: center; padding: 80px 0; color: var(--text-muted); font-size: 14px; }
+.reset-btn {
+  margin-top: 12px; background: none; border: 1px solid rgba(244,239,231,0.1);
+  color: var(--text-secondary); padding: 8px 20px; border-radius: 4px;
+  font-size: 12px; font-family: var(--font-body); transition: all 0.3s;
+}
+.reset-btn:hover { border-color: var(--bright-green); color: var(--bright-green); }
 
 @media (max-width: 768px) {
   .episodes-page { padding: 100px 20px 60px; }
