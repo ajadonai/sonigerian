@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Play } from 'lucide-react';
 import './Navbar.css';
@@ -14,6 +14,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [fontSize, setFontSize] = useState(() => localStorage.getItem('sn-fontsize') || 'medium');
   const [fontMenuOpen, setFontMenuOpen] = useState(false);
+  const fontRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -37,6 +38,16 @@ export default function Navbar() {
       }, 100);
     }
   }, [location]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (fontRef.current && !fontRef.current.contains(e.target)) {
+        setFontMenuOpen(false);
+      }
+    };
+    if (fontMenuOpen) document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [fontMenuOpen]);
 
   useEffect(() => {
     const match = FONT_SIZES.find(f => f.key === fontSize);
@@ -80,7 +91,7 @@ export default function Navbar() {
   };
 
   const FontToggle = ({ className }) => (
-    <div className={`font-toggle ${className || ''}`}>
+    <div className={`font-toggle ${className || ''}`} ref={fontRef}>
       <button className="font-trigger" onClick={() => setFontMenuOpen(!fontMenuOpen)} aria-label="Font size">
         <span className="font-icon">Aa</span>
       </button>
