@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { dilemmas } from '../data/placeholder';
+import { EMAILJS_CONFIG } from '../lib/emailjs';
 import SEO from '../components/SEO';
 import { useReveal } from '../lib/useReveal';
 import './Dilemma.css';
@@ -18,6 +20,7 @@ export default function Dilemma() {
   const [headerRef, headerVisible] = useReveal();
   const [dilemmaForm, setDilemmaForm] = useState({ name: '', gist: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
   const activeDilemma = dilemmas.find(d => d.active);
   const pastDilemmas = dilemmas.filter(d => !d.active);
 
@@ -82,11 +85,27 @@ export default function Dilemma() {
         <div className="submit-dilemma">
           <h2>Got a dilemma?</h2>
           <p>Send your hot takes, dilemmas and gist to Dami and Isaac.</p>
-          <form className="dilemma-form" onSubmit={(e) => {
+          <form className="dilemma-form" onSubmit={async (e) => {
             e.preventDefault();
-            setSubmitted(true);
-            setTimeout(() => setSubmitted(false), 4000);
-            setDilemmaForm({ name: '', gist: '' });
+            setSending(true);
+            try {
+              await emailjs.send(
+                EMAILJS_CONFIG.serviceId,
+                EMAILJS_CONFIG.templateId,
+                {
+                  from_name: dilemmaForm.name,
+                  message: dilemmaForm.gist,
+                  to_email: 'SoNigerian@eggcorndigital.com',
+                },
+                EMAILJS_CONFIG.publicKey
+              );
+              setSubmitted(true);
+              setDilemmaForm({ name: '', gist: '' });
+              setTimeout(() => setSubmitted(false), 5000);
+            } catch (err) {
+              alert('Something went wrong. Try the Google Form below.');
+            }
+            setSending(false);
           }}>
             <div className="df-field">
               <label>Name <span className="df-hint">(preferably a nickname or fake name)</span></label>
@@ -110,7 +129,9 @@ export default function Dilemma() {
             {submitted ? (
               <div className="df-success">Submitted! We might just use yours next week.</div>
             ) : (
-              <button type="submit" className="submit-dilemma-btn">Submit</button>
+              <button type="submit" className="submit-dilemma-btn" disabled={sending}>
+                {sending ? 'Sending...' : 'Submit'}
+              </button>
             )}
           </form>
           <a href="https://forms.gle/LKG8XM4v2yrax5dj9" target="_blank" rel="noopener noreferrer" className="df-fallback">Having issues? Submit via Google Form</a>
