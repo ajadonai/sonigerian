@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>So Nigerian</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-green: #1F6B3A;
+    --bright-green: #3FAE5A;
+    --warm-sand: #BFA27A;
+    --steel-blue: #5E6F73;
+    --off-white: #F4EFE7;
+    --charcoal: #2E2A28;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    background: var(--charcoal);
+    border-bottom: 3px solid var(--bright-green);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 28px;
+    color: var(--off-white);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--bright-green); }
+
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none; color: var(--off-white);
+    font-size: 14px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    position: relative; padding-bottom: 4px;
+    transition: color .3s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px; background: var(--bright-green);
+    transition: width .3s;
+  }
+  .nav-links a:hover { color: var(--bright-green); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--bright-green); }
+  .nav-links a.active::after { width: 100%; }
+
+  .nav-cta {
+    background: var(--bright-green); color: var(--charcoal);
+    border: none; padding: 10px 24px; border-radius: 6px;
+    font-family: 'DM Sans', sans-serif; font-weight: 700;
+    font-size: 13px; text-transform: uppercase; letter-spacing: 1px;
+    cursor: pointer; transition: background .3s, transform .15s;
+  }
+  .nav-cta:hover { background: var(--deep-green); color: #fff; transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    margin-top: 72px;
+    min-height: 92vh;
+    background: linear-gradient(160deg, var(--deep-green) 0%, #164d2a 55%, var(--charcoal) 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 15% 80%, rgba(63,174,90,.15), transparent),
+      radial-gradient(ellipse 500px 500px at 85% 20%, rgba(191,162,122,.1), transparent);
+  }
+
+  /* subtle pattern overlay */
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 1;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; max-width: 800px; padding: 0 24px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(63,174,90,.2); border: 1px solid rgba(63,174,90,.4);
+    color: var(--bright-green); padding: 6px 18px; border-radius: 100px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 28px;
+    animation: fadeDown .8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 96px); font-weight: 900;
+    color: var(--off-white); line-height: 1.05;
+    margin-bottom: 24px;
+    animation: fadeDown .8s .15s ease both;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--bright-green);
+    position: relative;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute; bottom: 4px; left: 0; right: 0;
+    height: 4px; background: var(--warm-sand); border-radius: 2px;
+    opacity: .5;
+  }
+
+  .hero p {
+    font-size: 18px; color: rgba(244,239,231,.7);
+    line-height: 1.7; max-width: 560px; margin: 0 auto 40px;
+    animation: fadeDown .8s .3s ease both;
+  }
+
+  .hero-buttons {
+    display: flex; gap: 16px; justify-content: center;
+    animation: fadeDown .8s .45s ease both;
+  }
+  .btn-primary {
+    background: var(--bright-green); color: var(--charcoal);
+    border: none; padding: 14px 36px; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-weight: 700;
+    font-size: 15px; cursor: pointer;
+    transition: transform .2s, box-shadow .3s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(63,174,90,.3); }
+
+  .btn-outline {
+    background: transparent; color: var(--off-white);
+    border: 2px solid var(--warm-sand); padding: 14px 36px; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-weight: 700;
+    font-size: 15px; cursor: pointer;
+    transition: background .3s, color .3s;
+  }
+  .btn-outline:hover { background: var(--warm-sand); color: var(--charcoal); }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 100px 48px; }
+  .section-label {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 3px; color: var(--bright-green);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px); font-weight: 900;
+    line-height: 1.15; margin-bottom: 20px;
+  }
+  .section-subtitle {
+    font-size: 16px; color: var(--steel-blue);
+    line-height: 1.7; max-width: 560px;
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    background: var(--off-white);
+  }
+  .about-visual {
+    height: 480px; border-radius: 16px; position: relative;
+    background: linear-gradient(135deg, var(--deep-green), var(--charcoal));
+    overflow: hidden;
+  }
+  .about-visual::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 20px,
+      rgba(255,255,255,.03) 20px, rgba(255,255,255,.03) 22px
+    );
+  }
+  .about-visual-label {
+    position: absolute; bottom: 24px; left: 24px;
+    background: rgba(0,0,0,.5); backdrop-filter: blur(8px);
+    color: var(--off-white); padding: 10px 20px; border-radius: 8px;
+    font-size: 13px; font-weight: 500; letter-spacing: .5px;
+  }
+
+  .about-text .stat-row {
+    display: flex; gap: 40px; margin-top: 40px;
+  }
+  .stat { border-left: 3px solid var(--bright-green); padding-left: 16px; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 900; color: var(--deep-green);
+  }
+  .stat-label { font-size: 13px; color: var(--steel-blue); margin-top: 4px; }
+
+  /* ─── EPISODES ─── */
+  .episodes { background: var(--charcoal); color: var(--off-white); }
+  .episodes .section-title { color: var(--off-white); }
+  .episodes .section-subtitle { color: rgba(244,239,231,.5); }
+
+  .episodes-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 48px;
+  }
+  .episodes-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .ep-card {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px; overflow: hidden;
+    transition: transform .3s, border-color .3s;
+  }
+  .ep-card:hover { transform: translateY(-4px); border-color: var(--bright-green); }
+
+  .ep-thumb {
+    height: 180px; position: relative;
+    background: linear-gradient(135deg, var(--deep-green), var(--steel-blue));
+  }
+  .ep-thumb .ep-number {
+    position: absolute; top: 14px; left: 14px;
+    background: var(--bright-green); color: var(--charcoal);
+    font-size: 11px; font-weight: 700; padding: 4px 10px;
+    border-radius: 4px; letter-spacing: .5px;
+  }
+  .ep-thumb .ep-duration {
+    position: absolute; bottom: 14px; right: 14px;
+    background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
+    color: #fff; font-size: 12px; padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .ep-play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(255,255,255,.15); backdrop-filter: blur(6px);
+    border: 2px solid rgba(255,255,255,.3);
+    display: flex; align-items: center; justify-content: center;
+    transition: background .3s;
+  }
+  .ep-card:hover .ep-play { background: var(--bright-green); border-color: var(--bright-green); }
+  .ep-play svg { fill: #fff; margin-left: 3px; }
+
+  .ep-info { padding: 20px; }
+  .ep-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700; margin-bottom: 8px;
+  }
+  .ep-info p {
+    font-size: 13px; color: rgba(244,239,231,.5); line-height: 1.6;
+  }
+  .ep-tags { display: flex; gap: 8px; margin-top: 14px; }
+  .ep-tag {
+    font-size: 11px; padding: 4px 10px; border-radius: 100px;
+    background: rgba(63,174,90,.12); color: var(--bright-green);
+    font-weight: 600;
+  }
+
+  /* ─── DILEMMA ─── */
+  .dilemma {
+    background: var(--warm-sand);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .dilemma::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 500px 300px at 20% 50%, rgba(31,107,58,.15), transparent),
+      radial-gradient(ellipse 400px 400px at 80% 50%, rgba(46,42,40,.1), transparent);
+  }
+  .dilemma .section-title { color: var(--charcoal); }
+  .dilemma .section-label { color: var(--deep-green); }
+  .dilemma .section-subtitle { color: rgba(46,42,40,.7); margin: 0 auto 48px; }
+
+  .dilemma-card {
+    position: relative; z-index: 2;
+    max-width: 700px; margin: 0 auto;
+    background: var(--off-white); border-radius: 20px;
+    padding: 48px; text-align: left;
+    box-shadow: 0 20px 60px rgba(46,42,40,.15);
+  }
+  .dilemma-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; font-weight: 700; line-height: 1.4;
+    color: var(--charcoal); margin-bottom: 32px;
+  }
+  .dilemma-options { display: flex; flex-direction: column; gap: 14px; }
+  .dilemma-opt {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 24px; border-radius: 12px;
+    border: 2px solid rgba(46,42,40,.1);
+    cursor: pointer; transition: all .3s;
+    font-size: 15px; font-weight: 500;
+  }
+  .dilemma-opt:hover { border-color: var(--deep-green); background: rgba(31,107,58,.05); }
+  .opt-letter {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--deep-green); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px; flex-shrink: 0;
+  }
+
+  .dilemma-vote {
+    margin-top: 28px; text-align: center;
+  }
+  .dilemma-vote button {
+    background: var(--deep-green); color: #fff;
+    border: none; padding: 14px 40px; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-weight: 700;
+    font-size: 15px; cursor: pointer;
+    transition: background .3s, transform .2s;
+  }
+  .dilemma-vote button:hover { background: var(--bright-green); color: var(--charcoal); transform: translateY(-2px); }
+
+  /* ─── CONTACT ─── */
+  .contact {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    background: var(--off-white);
+  }
+  .contact .section-title { color: var(--charcoal); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+  .form-group label {
+    display: block; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--steel-blue); margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea {
+    width: 100%; padding: 14px 18px; border-radius: 10px;
+    border: 2px solid rgba(46,42,40,.12);
+    background: #fff; font-family: 'DM Sans', sans-serif;
+    font-size: 15px; color: var(--charcoal);
+    transition: border-color .3s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--bright-green); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  .form-submit {
+    background: var(--deep-green); color: #fff;
+    border: none; padding: 14px 40px; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-weight: 700;
+    font-size: 15px; cursor: pointer; align-self: flex-start;
+    transition: background .3s, transform .2s;
+  }
+  .form-submit:hover { background: var(--bright-green); color: var(--charcoal); transform: translateY(-2px); }
+
+  .contact-info { padding-top: 80px; }
+  .contact-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; margin-bottom: 20px;
+  }
+  .contact-info p {
+    font-size: 15px; color: var(--steel-blue); line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .social-links { display: flex; gap: 12px; }
+  .social-link {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--charcoal); color: var(--off-white);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 18px; font-weight: 700;
+    transition: background .3s, transform .2s;
+  }
+  .social-link:hover { background: var(--bright-green); color: var(--charcoal); transform: translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--charcoal); color: rgba(244,239,231,.4);
+    padding: 48px; display: flex; justify-content: space-between; align-items: center;
+    border-top: 3px solid var(--deep-green);
+  }
+  footer .logo { font-size: 22px; }
+  .footer-links { display: flex; gap: 28px; list-style: none; }
+  .footer-links a {
+    color: rgba(244,239,231,.4); text-decoration: none;
+    font-size: 13px; transition: color .3s;
+  }
+  .footer-links a:hover { color: var(--bright-green); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 64px 24px; }
+    .about { grid-template-columns: 1fr; gap: 40px; }
+    .episodes-grid { grid-template-columns: 1fr; }
+    .contact { grid-template-columns: 1fr; gap: 40px; }
+    .contact-info { padding-top: 0; }
+    .about-text .stat-row { gap: 24px; }
+    .episodes-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">So<span>Nigerian</span></div>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#episodes">Episodes</a></li>
+    <li><a href="#dilemma">Dilemma</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta">Listen Now</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Podcast &bull; Culture &bull; Stories</div>
+    <h1>Unapologetically<br><em>Nigerian</em></h1>
+    <p>Real conversations about the culture, the dilemmas, the laughs, and everything that makes us — us.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary">Latest Episode</button>
+      <button class="btn-outline">Explore All</button>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-visual-label">📷 Host photo / team visual</div>
+  </div>
+  <div class="about-text">
+    <span class="section-label">About the Show</span>
+    <h2 class="section-title">Stories that hit<br>different.</h2>
+    <p class="section-subtitle">So Nigerian is a show about navigating life, culture, and identity through a distinctly Nigerian lens. From family politics to jollof debates — nothing is off limits.</p>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Episodes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">10K</div>
+        <div class="stat-label">Listeners</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.8</div>
+        <div class="stat-label">Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EPISODES -->
+<section class="episodes" id="episodes">
+  <div class="episodes-header">
+    <div>
+      <span class="section-label">Latest Episodes</span>
+      <h2 class="section-title">Catch Up</h2>
+      <p class="section-subtitle">New episodes drop weekly. Here are the most recent ones.</p>
+    </div>
+    <button class="btn-outline" style="border-color: var(--warm-sand); color: var(--warm-sand);">View All →</button>
+  </div>
+  <div class="episodes-grid">
+
+    <div class="ep-card">
+      <div class="ep-thumb" style="background: linear-gradient(135deg, #1F6B3A, #3FAE5A);">
+        <span class="ep-number">EP 52</span>
+        <div class="ep-play"><svg width="18" height="18" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <span class="ep-duration">42:15</span>
+      </div>
+      <div class="ep-info">
+        <h3>"Owambe" Pressure</h3>
+        <p>When every weekend is a party and your pocket is crying. The economics of Lagos social life.</p>
+        <div class="ep-tags"><span class="ep-tag">Culture</span><span class="ep-tag">Money</span></div>
+      </div>
+    </div>
+
+    <div class="ep-card">
+      <div class="ep-thumb" style="background: linear-gradient(135deg, #5E6F73, #2E2A28);">
+        <span class="ep-number">EP 51</span>
+        <div class="ep-play"><svg width="18" height="18" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <span class="ep-duration">38:47</span>
+      </div>
+      <div class="ep-info">
+        <h3>The Japa Dilemma</h3>
+        <p>To leave or to stay? A deep dive into the great Nigerian migration debate.</p>
+        <div class="ep-tags"><span class="ep-tag">Migration</span><span class="ep-tag">Identity</span></div>
+      </div>
+    </div>
+
+    <div class="ep-card">
+      <div class="ep-thumb" style="background: linear-gradient(135deg, #BFA27A, #1F6B3A);">
+        <span class="ep-number">EP 50</span>
+        <div class="ep-play"><svg width="18" height="18" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <span class="ep-duration">55:03</span>
+      </div>
+      <div class="ep-info">
+        <h3>Mummy Said No</h3>
+        <p>Nigerian parents and the art of saying no to everything. Featuring your wildest stories.</p>
+        <div class="ep-tags"><span class="ep-tag">Family</span><span class="ep-tag">Comedy</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DILEMMA -->
+<section class="dilemma" id="dilemma">
+  <span class="section-label">The Dilemma</span>
+  <h2 class="section-title">What Would You Do?</h2>
+  <p class="section-subtitle">Every week, we put you on the spot with a scenario. No right answers — just vibes.</p>
+
+  <div class="dilemma-card">
+    <div class="dilemma-q">"Your aunty gives you ₦500K to hold for her. Your rent is due and she travels for 3 months. What do you do?"</div>
+    <div class="dilemma-options">
+      <div class="dilemma-opt">
+        <div class="opt-letter">A</div>
+        <span>Touch am. Pay rent. Hustle to replace it before she returns.</span>
+      </div>
+      <div class="dilemma-opt">
+        <div class="opt-letter">B</div>
+        <span>Don't touch it. Sleep on the street if you have to. Integrity first.</span>
+      </div>
+      <div class="dilemma-opt">
+        <div class="opt-letter">C</div>
+        <span>Call aunty, explain the situation, and ask properly.</span>
+      </div>
+    </div>
+    <div class="dilemma-vote">
+      <button>Cast Your Vote</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div>
+    <span class="section-label">Get In Touch</span>
+    <h2 class="section-title">Say Something.</h2>
+    <p class="section-subtitle">Got a dilemma? Want to be on the show? Just want to yarn? Drop a message.</p>
+    <div class="contact-form">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="What should we call you?">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@email.com">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Spill it..."></textarea>
+      </div>
+      <button class="form-submit">Send Message</button>
+    </div>
+  </div>
+  <div class="contact-info">
+    <h3>Follow the Conversation</h3>
+    <p>We're most active on social media. Follow us for behind-the-scenes content, polls, and community banter.</p>
+    <div class="social-links">
+      <a href="#" class="social-link">IG</a>
+      <a href="#" class="social-link">TW</a>
+      <a href="#" class="social-link">YT</a>
+      <a href="#" class="social-link">TT</a>
+    </div>
+    <div style="margin-top: 40px;">
+      <h3>Or Email Us</h3>
+      <p style="color: var(--deep-green); font-weight: 600;">hello@sonigerian.com</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">So<span>Nigerian</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Episodes</a></li>
+    <li><a href="#">Dilemma</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <span style="font-size: 13px;">© 2026 So Nigerian. All rights reserved.</span>
+</footer>
+
+</body>
+</html>
