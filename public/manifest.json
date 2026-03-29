@@ -1,0 +1,17 @@
+{
+  "name": "So Nigerian Podcast",
+  "short_name": "SoNigerian",
+  "description": "Bold social commentary podcast with Dami Aros & Isaac. Pop culture, relationships, Japa struggles, and everyday Nigerian life.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2E2A28",
+  "theme_color": "#1F6B3A",
+  "icons": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
