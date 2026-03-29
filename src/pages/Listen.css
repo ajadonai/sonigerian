@@ -1,6 +1,20 @@
 .listen-page { padding: 120px 56px 80px; max-width: 700px; margin: 0 auto; }
 .listen-header { margin-bottom: 48px; }
-.listen-header .back-link { margin-bottom: 32px; }
+.listen-header .back-link { margin-bottom: 24px; }
+
+.listen-hero-image {
+  position: relative; width: 100%; height: 220px;
+  border-radius: 14px; overflow: hidden; margin-bottom: 32px;
+}
+.listen-hero-image img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 20%;
+  filter: brightness(0.8) contrast(1.05);
+}
+.listen-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--charcoal) 0%, rgba(46,42,40,0.2) 50%, transparent 100%);
+}
 
 .platforms-grid { display: flex; flex-direction: column; gap: 12px; }
 

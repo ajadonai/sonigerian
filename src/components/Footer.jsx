@@ -25,6 +25,7 @@ export default function Footer() {
       <div className="footer-bottom">
         <span>&copy; {new Date().getFullYear()} So Nigerian. All rights reserved.</span>
         <span>Managed by Eggcorn Digital</span>
+        <span className="footer-credit">Designed & built by <a href="https://x.com/wlxaj" target="_blank" rel="noopener noreferrer">Trip</a></span>
       </div>
     </footer>
   );

@@ -31,6 +31,10 @@ export default function Listen() {
 
       <div className={`listen-header reveal ${headerVisible ? 'visible' : ''}`} ref={headerRef}>
         <Link to="/" className="back-link"><ArrowLeft size={16} /> Back home</Link>
+        <div className="listen-hero-image">
+          <img src="/hosts.png" alt="Dami Aros and Isaac — So Nigerian" />
+          <div className="listen-hero-overlay" />
+        </div>
         <div className="eyebrow"><div className="eyebrow-line" /><span>Listen Now</span></div>
         <h1 className="page-title">Pick your platform</h1>
         <p className="page-sub">So Nigerian is available everywhere you get your podcasts.</p>
