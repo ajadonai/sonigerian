@@ -80,6 +80,9 @@
   font-size: 11px; font-weight: 500; text-transform: uppercase;
   letter-spacing: 2px; color: var(--text-muted); margin-top: 6px;
 }
+.hero-platforms-mobile {
+  display: none; gap: 8px; margin-top: 16px;
+}
 
 .hero-right { position: relative; overflow: hidden; }
 .hero-image-container { position: absolute; inset: 0; }
@@ -381,8 +384,9 @@
   .stat-item { min-width: calc(50% - 12px); }
   .hero-decorator.top-accent { width: 44px; height: 44px; top: 16px; right: 16px; }
   .hero-decorator.corner-lines { display: none; }
-  .platform-badges { gap: 6px; left: 12px; top: 12px; }
+  .platform-badges { display: none; }
   .platform-badge { padding: 5px 10px; font-size: 8px; }
+  .hero-platforms-mobile { display: flex; }
 
   .featured-strip { padding: 16px 20px; }
   .featured-inner { grid-template-columns: 1fr; gap: 12px; padding: 18px 20px; }

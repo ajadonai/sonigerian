@@ -57,6 +57,11 @@ export default function Home() {
                 <div className="stat-label">On Spotify NG</div>
               </div>
             </div>
+            <div className="hero-platforms-mobile">
+              <div className="platform-badge">Spotify</div>
+              <div className="platform-badge">Apple</div>
+              <div className="platform-badge">YouTube</div>
+            </div>
           </div>
           <div className="hero-right">
             <div className="hero-image-container">
