@@ -70,6 +70,7 @@
   letter-spacing: 1.5px; color: var(--text-muted);
 }
 .df-optional { font-weight: 400; text-transform: none; letter-spacing: 0; }
+.df-hint { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--text-faint); }
 .df-field input, .df-field textarea {
   width: 100%; padding: 12px 16px; border-radius: 8px;
   border: 1.5px solid rgba(244,239,231,0.08);

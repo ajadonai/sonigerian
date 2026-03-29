@@ -16,7 +16,7 @@ function RevealItem({ children, delay = 0 }) {
 export default function Dilemma() {
   const [votes, setVotes] = useState({});
   const [headerRef, headerVisible] = useReveal();
-  const [dilemmaForm, setDilemmaForm] = useState({ scenario: '', optionA: '', optionB: '', optionC: '' });
+  const [dilemmaForm, setDilemmaForm] = useState({ name: '', gist: '' });
   const [submitted, setSubmitted] = useState(false);
   const activeDilemma = dilemmas.find(d => d.active);
   const pastDilemmas = dilemmas.filter(d => !d.active);
@@ -81,41 +81,36 @@ export default function Dilemma() {
       <RevealItem delay={0.1}>
         <div className="submit-dilemma">
           <h2>Got a dilemma?</h2>
-          <p>Submit your own scenario and it might be featured on the next episode.</p>
+          <p>Send your hot takes, dilemmas and gist to Dami and Isaac.</p>
           <form className="dilemma-form" onSubmit={(e) => {
             e.preventDefault();
             setSubmitted(true);
             setTimeout(() => setSubmitted(false), 4000);
-            setDilemmaForm({ scenario: '', optionA: '', optionB: '', optionC: '' });
+            setDilemmaForm({ name: '', gist: '' });
           }}>
             <div className="df-field">
-              <label>Your dilemma scenario</label>
-              <textarea
-                placeholder="e.g. Your best friend borrows ₦200K and ghosts you for 3 months..."
-                value={dilemmaForm.scenario}
-                onChange={e => setDilemmaForm({...dilemmaForm, scenario: e.target.value})}
-                rows={3}
+              <label>Name <span className="df-hint">(preferably a nickname or fake name)</span></label>
+              <input
+                placeholder="Your answer"
+                value={dilemmaForm.name}
+                onChange={e => setDilemmaForm({...dilemmaForm, name: e.target.value})}
                 required
               />
             </div>
-            <div className="df-options-grid">
-              <div className="df-field">
-                <label>Option A</label>
-                <input placeholder="e.g. Confront them publicly" value={dilemmaForm.optionA} onChange={e => setDilemmaForm({...dilemmaForm, optionA: e.target.value})} required />
-              </div>
-              <div className="df-field">
-                <label>Option B</label>
-                <input placeholder="e.g. Let it go, lesson learned" value={dilemmaForm.optionB} onChange={e => setDilemmaForm({...dilemmaForm, optionB: e.target.value})} required />
-              </div>
-              <div className="df-field">
-                <label>Option C <span className="df-optional">(optional)</span></label>
-                <input placeholder="e.g. Send someone else to collect" value={dilemmaForm.optionC} onChange={e => setDilemmaForm({...dilemmaForm, optionC: e.target.value})} />
-              </div>
+            <div className="df-field">
+              <label>Your gist <span className="df-hint">(tell us your story, dilemma, confession or hot take)</span></label>
+              <textarea
+                placeholder="Your answer"
+                value={dilemmaForm.gist}
+                onChange={e => setDilemmaForm({...dilemmaForm, gist: e.target.value})}
+                rows={4}
+                required
+              />
             </div>
             {submitted ? (
               <div className="df-success">Submitted! We might just use yours next week.</div>
             ) : (
-              <button type="submit" className="submit-dilemma-btn">Submit dilemma</button>
+              <button type="submit" className="submit-dilemma-btn">Submit</button>
             )}
           </form>
           <a href="https://forms.gle/LKG8XM4v2yrax5dj9" target="_blank" rel="noopener noreferrer" className="df-fallback">Having issues? Submit via Google Form</a>
