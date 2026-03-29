@@ -30,6 +30,7 @@
   flex-shrink: 0;
 }
 .nav-logo span { color: var(--bright-green); }
+.nav-logo .logo-podcast { color: var(--off-white); font-size: 0.65em; font-weight: 400; letter-spacing: 1px; }
 .navbar.scrolled .nav-logo { font-size: 21px; }
 
 .nav-links {

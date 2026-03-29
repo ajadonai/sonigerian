@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-inner">
         <div className="footer-left">
-          <Link to="/" className="footer-logo">So<span>Nigerian</span></Link>
+          <Link to="/" className="footer-logo">So<span>Nigerian</span> <span className="logo-podcast">Podcast</span></Link>
           <p className="footer-tagline">Real conversations. No filter.</p>
         </div>
         <ul className="footer-links">

@@ -117,7 +117,7 @@ export default function Navbar() {
     <>
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <a href="/" className="nav-logo" onClick={(e) => { e.preventDefault(); if (location.pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); else navigate('/'); }}>
-          So<span>Nigerian</span>
+          So<span>Nigerian</span> <span className="logo-podcast">Podcast</span>
         </a>
         <ul className="nav-links">
           {navLinks.map(link => (
