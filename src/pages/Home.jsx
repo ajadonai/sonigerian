@@ -9,6 +9,7 @@ import './Home.css';
 export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [selectedOption, setSelectedOption] = useState(null);
+  const [expandedHost, setExpandedHost] = useState(null);
   const [aboutRef, aboutVisible] = useReveal();
   const [episodesRef, episodesVisible] = useReveal();
   const [dilemmaRef, dilemmaVisible] = useReveal();
@@ -98,7 +99,10 @@ export default function Home() {
               <div className="host-info">
                 <h3>{host.name}</h3>
                 <span className="host-role">{host.role}</span>
-                <p>{host.bio}</p>
+                <p className={expandedHost === host.name ? '' : 'truncated'}>{host.bio}</p>
+                <button className="host-show-more" onClick={() => setExpandedHost(expandedHost === host.name ? null : host.name)}>
+                  {expandedHost === host.name ? 'Show less' : 'Show more'}
+                </button>
                 <div className="host-socials">
                   {host.twitter && <a href={host.twitter} target="_blank" rel="noopener noreferrer" className="host-social-link">X</a>}
                   {host.instagram && <a href={host.instagram} target="_blank" rel="noopener noreferrer" className="host-social-link">IG</a>}
