@@ -1,0 +1,64 @@
+.episodes-page { padding: 120px 56px 80px; min-height: 100vh; }
+.episodes-page-header { margin-bottom: 32px; }
+.page-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); font-weight: 700; margin-bottom: 8px; }
+.page-sub { font-size: 14px; color: var(--text-muted); font-weight: 300; }
+
+.episodes-controls { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; flex-wrap: wrap; }
+.search-box {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: 6px; padding: 10px 16px; min-width: 240px;
+}
+.search-box svg { stroke: var(--text-muted); flex-shrink: 0; }
+.search-box input {
+  background: none; border: none; color: var(--off-white);
+  font-size: 13px; font-family: var(--font-body); outline: none; width: 100%;
+}
+.tag-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-btn {
+  font-size: 11px; padding: 7px 16px; border-radius: 100px;
+  border: 1px solid rgba(244,239,231,0.08); background: transparent;
+  color: var(--text-muted); font-weight: 500; transition: all 0.3s;
+}
+.filter-btn:hover { border-color: rgba(63,174,90,0.4); }
+.filter-btn.active { background: var(--bright-green); color: var(--charcoal); border-color: var(--bright-green); }
+
+.ep-list-item {
+  display: grid; grid-template-columns: 48px 1fr auto auto 40px;
+  gap: 16px; align-items: center; padding: 18px 0;
+  border-bottom: 1px solid rgba(244,239,231,0.04);
+  transition: all 0.2s;
+}
+.ep-list-item:hover { background: rgba(244,239,231,0.02); border-radius: 8px; padding-left: 12px; margin-left: -12px; padding-right: 12px; margin-right: -12px; }
+.ep-list-num { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--text-faint); text-align: center; }
+.ep-list-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.ep-list-info p { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+.ep-list-tags { display: flex; gap: 6px; }
+.ep-list-meta { text-align: right; }
+.ep-list-dur { font-size: 12px; color: var(--text-secondary); display: block; }
+.ep-list-date { font-size: 10px; color: var(--text-muted); }
+.ep-list-play {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(244,239,231,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); transition: all 0.3s;
+}
+.ep-list-item:hover .ep-list-play { border-color: var(--bright-green); color: var(--bright-green); }
+
+.load-more {
+  display: block; margin: 32px auto 0;
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--bright-green); border: 1px solid rgba(63,174,90,0.3);
+  padding: 12px 32px; border-radius: 4px; background: none;
+  transition: all 0.3s;
+}
+.load-more:hover { background: rgba(63,174,90,0.1); }
+
+.no-results { text-align: center; padding: 80px 0; color: var(--text-muted); font-size: 14px; }
+
+@media (max-width: 768px) {
+  .episodes-page { padding: 100px 20px 60px; }
+  .ep-list-item { grid-template-columns: 36px 1fr auto; }
+  .ep-list-tags, .ep-list-play { display: none; }
+  .search-box { min-width: 100%; }
+}

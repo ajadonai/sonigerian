@@ -1,0 +1,47 @@
+.dilemma-page { padding: 120px 56px 80px; max-width: 760px; margin: 0 auto; }
+.dilemma-page-header { text-align: center; margin-bottom: 40px; }
+.dilemma-page-header .eyebrow { justify-content: center; }
+
+.dilemma-card-full {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: 14px; padding: 36px; margin-bottom: 20px;
+}
+.dilemma-card-full.active-card { border-color: rgba(63,174,90,0.2); }
+.active-badge { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.active-dot { width: 8px; height: 8px; background: var(--bright-green); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
+.active-badge span { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--bright-green); }
+
+.dilemma-q { font-family: var(--font-display); font-size: 22px; font-weight: 700; line-height: 1.4; margin-bottom: 24px; }
+.dilemma-opts { display: flex; flex-direction: column; gap: 10px; }
+.dopt {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 18px; border-radius: 10px;
+  border: 1.5px solid rgba(244,239,231,0.06);
+  cursor: pointer; transition: all 0.3s;
+}
+.dopt:hover { border-color: var(--bright-green); }
+.dopt.chosen { border-color: var(--bright-green); background: rgba(63,174,90,0.04); }
+.dopt-letter {
+  width: 32px; height: 32px; border-radius: 6px;
+  background: var(--deep-green); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px; flex-shrink: 0;
+}
+.dopt-content { flex: 1; font-size: 14px; color: var(--text-secondary); }
+.dopt-result { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.dopt-result .dopt-bar {
+  height: 4px; background: var(--bright-green); border-radius: 2px;
+  transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.dopt-result span { font-size: 12px; font-weight: 600; color: var(--bright-green); }
+.vote-count { text-align: center; margin-top: 18px; font-size: 12px; color: var(--text-muted); }
+.past-date { margin-top: 12px; font-size: 11px; color: var(--text-muted); }
+
+.past-section { margin-top: 48px; }
+.past-heading { font-size: 18px; font-weight: 600; margin-bottom: 20px; }
+
+@media (max-width: 768px) {
+  .dilemma-page { padding: 100px 20px 60px; }
+  .dilemma-card-full { padding: 24px; }
+  .dilemma-q { font-size: 18px; }
+}
