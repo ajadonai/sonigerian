@@ -30,10 +30,9 @@ export default function EpisodeDetail() {
           </div>
           <p className="detail-desc">{episode.description}</p>
           <div className="detail-platforms">
-            <button className="plat-btn">Spotify</button>
-            <button className="plat-btn">Apple Podcasts</button>
-            <button className="plat-btn">YouTube</button>
-            <button className="plat-btn share"><Share2 size={14} /></button>
+            <a href={episode.audioLink} target="_blank" rel="noopener noreferrer" className="plat-btn">Apple Podcasts</a>
+            <a href="https://pod.link/sonigerian" target="_blank" rel="noopener noreferrer" className="plat-btn">All Platforms</a>
+            <button className="plat-btn share" onClick={() => { navigator.clipboard.writeText(window.location.href); }}><Share2 size={14} /></button>
           </div>
         </div>
       </div>

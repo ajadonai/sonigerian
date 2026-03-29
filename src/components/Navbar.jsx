@@ -137,10 +137,10 @@ export default function Navbar() {
         </ul>
         <div className="nav-right">
           <FontToggle className="desktop-only" />
-          <button className="nav-cta">
+          <a href="https://pod.link/sonigerian" target="_blank" rel="noopener noreferrer" className="nav-cta">
             <Play size={12} fill="currentColor" />
             Listen Now
-          </button>
+          </a>
         </div>
         <button className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Menu">
           <span /><span /><span />
@@ -178,9 +178,11 @@ export default function Navbar() {
               ))}
             </div>
           </div>
-          <button className="panel-cta">Listen Now</button>
+          <a href="https://pod.link/sonigerian" target="_blank" rel="noopener noreferrer" className="panel-cta">Listen Now</a>
           <div className="panel-socials">
-            <a href="#">IG</a><a href="#">TW</a><a href="#">YT</a><a href="#">TT</a>
+            <a href="https://instagram.com/sonigerian_" target="_blank" rel="noopener noreferrer">IG</a>
+            <a href="https://twitter.com/sonigerian_" target="_blank" rel="noopener noreferrer">TW</a>
+            <a href="https://youtube.com/@sonigerianpodcast" target="_blank" rel="noopener noreferrer">YT</a>
           </div>
         </div>
       </div>

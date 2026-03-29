@@ -15,10 +15,9 @@ export default function Footer() {
           <li><Link to="/dilemma">Dilemma</Link></li>
         </ul>
         <div className="footer-socials">
-          <a href="#" aria-label="Instagram">IG</a>
-          <a href="#" aria-label="Twitter">TW</a>
-          <a href="#" aria-label="YouTube">YT</a>
-          <a href="#" aria-label="TikTok">TT</a>
+          <a href="https://instagram.com/sonigerian_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+          <a href="https://twitter.com/sonigerian_" target="_blank" rel="noopener noreferrer" aria-label="Twitter">TW</a>
+          <a href="https://youtube.com/@sonigerianpodcast" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YT</a>
         </div>
       </div>
       <div className="footer-bottom">

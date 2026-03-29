@@ -62,11 +62,11 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(2.8em, 6vw, 5em);
+  font-size: clamp(48px, 5.5vw, 80px);
 }
 
 .section-title {
-  font-size: clamp(1.8em, 4vw, 2.8em);
+  font-size: clamp(28px, 3.5vw, 44px);
 }
 
 a { text-decoration: none; color: inherit; }

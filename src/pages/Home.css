@@ -28,14 +28,14 @@
 }
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(52px, 6vw, 88px); font-weight: 700;
+  font-weight: 700;
   line-height: 1.0; color: var(--off-white);
   margin-bottom: 32px; animation: fadeUp 0.8s 0.2s ease both;
 }
 .hero-title em { font-style: italic; color: var(--bright-green); display: block; }
 .hero-title .accent { position: relative; display: inline-block; }
 .hero-title .accent::after {
-  content: ''; position: absolute; bottom: 6px; left: 0; right: 0;
+  content: ''; position: absolute; bottom: 4px; left: 0; right: 0;
   height: 3px; background: var(--warm-sand); opacity: 0.6; border-radius: 2px;
 }
 .hero-desc {

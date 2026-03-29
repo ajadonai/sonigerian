@@ -69,9 +69,8 @@ export default function Home() {
             <div className="hero-decorator corner-lines" />
             <div className="hero-decorator floating-text">EST. 2020</div>
             <div className="platform-badges">
-              <div className="platform-badge">Spotify</div>
-              <div className="platform-badge">Apple</div>
-              <div className="platform-badge">YouTube</div>
+              <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer" className="platform-badge">YouTube</a>
+              <a href={siteConfig.platformLink} target="_blank" rel="noopener noreferrer" className="platform-badge">All Platforms</a>
             </div>
           </div>
         </div>
@@ -194,10 +193,9 @@ export default function Home() {
           <h3>Follow the conversation</h3>
           <p>We're most active on social media. Follow us for behind-the-scenes content, polls, and community banter.</p>
           <div className="contact-socials">
-            <a href="#">Instagram</a>
-            <a href="#">Twitter / X</a>
-            <a href="#">YouTube</a>
-            <a href="#">TikTok</a>
+            <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer">Twitter / X</a>
+            <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
           </div>
           <div className="contact-email">
             <h3>Or email us</h3>
