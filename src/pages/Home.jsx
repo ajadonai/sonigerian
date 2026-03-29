@@ -21,6 +21,7 @@ export default function Home() {
     <main>
       {/* ═══ HERO ═══ */}
       <section className="hero" id="home">
+        <div className="hero-grid">
         <div className="hero-left">
           <div className="hero-eyebrow">
             <div className="eyebrow-line" />
@@ -74,21 +75,22 @@ export default function Home() {
             <div className="platform-badge">YouTube</div>
           </div>
         </div>
-      </section>
-
-      {/* ═══ MARQUEE ═══ */}
-      <div className="marquee-strip">
-        <div className="marquee-track">
-          {[...Array(2)].map((_, rep) => (
-            ['Pop Culture', 'Relationships', 'Japa Stories', 'Social Media', 'Hot Takes', 'Nigerian Life', 'As Seen In ThisDay', 'Featured On Pulse'].map((item, i) => (
-              <div className="marquee-item" key={`${rep}-${i}`}>
-                <span>{item}</span>
-                <div className="marquee-dot" />
-              </div>
-            ))
-          ))}
         </div>
-      </div>
+
+        {/* Marquee inside hero */}
+        <div className="marquee-strip">
+          <div className="marquee-track">
+            {[...Array(2)].map((_, rep) => (
+              ['Pop Culture', 'Relationships', 'Japa Stories', 'Social Media', 'Hot Takes', 'Nigerian Life', 'As Seen In ThisDay', 'Featured On Pulse'].map((item, i) => (
+                <div className="marquee-item" key={`${rep}-${i}`}>
+                  <span>{item}</span>
+                  <div className="marquee-dot" />
+                </div>
+              ))
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ═══ FEATURED EPISODE ═══ */}
       <div className="featured-strip">

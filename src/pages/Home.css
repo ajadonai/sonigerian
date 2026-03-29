@@ -1,16 +1,24 @@
 /* ═══ HERO ═══ */
 .hero {
   height: 100dvh;
-  display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 68px; /* navbar height */
+  display: flex;
+  flex-direction: column;
   background: var(--charcoal);
   overflow: hidden;
 }
+.hero-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 0;
+}
 .hero-left {
   display: flex; flex-direction: column; justify-content: center;
-  padding: 80px 72px 48px;
+  padding: 40px 72px;
   position: relative; z-index: 3;
-  overflow-y: auto;
   min-height: 0;
+  overflow-y: auto;
 }
 .hero-eyebrow, .eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
 .eyebrow-line { width: 48px; height: 1.5px; background: var(--bright-green); }
@@ -121,7 +129,7 @@
 .platform-badge:hover { border-color: var(--bright-green); color: var(--bright-green); }
 
 /* ═══ MARQUEE ═══ */
-.marquee-strip { background: var(--deep-green); padding: 14px 0; overflow: hidden; }
+.marquee-strip { background: var(--deep-green); padding: 14px 0; overflow: hidden; flex-shrink: 0; }
 .marquee-track { display: flex; width: max-content; animation: marquee 25s linear infinite; }
 .marquee-item { display: flex; align-items: center; gap: 24px; padding: 0 24px; white-space: nowrap; }
 .marquee-item span { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 3px; color: rgba(244,239,231,0.7); }
@@ -333,8 +341,9 @@
 
 /* ═══ RESPONSIVE — TABLET ═══ */
 @media (max-width: 1024px) {
-  .hero { grid-template-columns: 1fr; height: 100dvh; min-height: 0; grid-template-rows: 28vh 1fr; overflow: hidden; }
-  .hero-left { padding: 20px 48px 24px; order: 2; justify-content: flex-start; overflow-y: auto; }
+  .hero { padding-top: 56px; }
+  .hero-grid { grid-template-columns: 1fr; grid-template-rows: 28vh 1fr; }
+  .hero-left { padding: 20px 48px 16px; order: 2; justify-content: flex-start; }
   .hero-right { min-height: 0; order: 1; }
   .hero-image-overlay {
     background: linear-gradient(to top, var(--charcoal) 0%, rgba(46,42,40,0.3) 50%, transparent 100%);
@@ -355,8 +364,9 @@
 
 /* ═══ RESPONSIVE — MOBILE ═══ */
 @media (max-width: 640px) {
-  .hero { height: 100dvh; min-height: 0; grid-template-rows: 22vh 1fr; }
-  .hero-left { padding: 16px 20px 20px; }
+  .hero { padding-top: 48px; }
+  .hero-grid { grid-template-rows: 22vh 1fr; }
+  .hero-left { padding: 12px 20px 12px; }
   .hero-right { min-height: 0; }
   .hero-eyebrow { margin-bottom: 10px; }
   .eyebrow-line { width: 24px; }
