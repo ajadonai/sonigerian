@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Play, ArrowRight, Send, ChevronRight } from 'lucide-react';
+import { Play, ArrowRight, ChevronRight } from 'lucide-react';
 import { episodes, dilemmas, siteConfig } from '../data/placeholder';
 import SEO from '../components/SEO';
 import { useReveal } from '../lib/useReveal';
 import './Home.css';
 
 export default function Home() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [selectedOption, setSelectedOption] = useState(null);
   const [expandedHost, setExpandedHost] = useState(null);
   const [aboutRef, aboutVisible] = useReveal();
@@ -179,38 +178,31 @@ export default function Home() {
       )}
 
       <section className={`contact-section reveal ${contactVisible ? 'visible' : ''}`} id="contact" ref={contactRef}>
-        <div className="contact-left">
+        <div className="contact-image-side">
+          <div className="contact-image-wrap">
+            <img src="/hosts.png" alt="Dami and Isaac" />
+            <div className="contact-image-overlay" />
+            <div className="contact-image-text">
+              <span>Let's talk</span>
+            </div>
+          </div>
+        </div>
+        <div className="contact-content">
           <div className="eyebrow"><div className="eyebrow-line" /><span>Get In Touch</span></div>
           <h2 className="section-title">Say something.</h2>
-          <p className="section-sub">Got a dilemma? Want to be on the show? Just want to yarn? Drop a message.</p>
-          <form className="contact-form" onSubmit={e => e.preventDefault()}>
-            <div className="form-group">
-              <label>Your Name</label>
-              <input type="text" placeholder="What should we call you?" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
-            </div>
-            <div className="form-group">
-              <label>Email</label>
-              <input type="email" placeholder="you@email.com" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
-            </div>
-            <div className="form-group">
-              <label>Message</label>
-              <textarea placeholder="Spill it..." value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} />
-            </div>
-            <button type="submit" className="form-submit"><Send size={14} /> Send Message</button>
-          </form>
-        </div>
-        <div className="contact-right">
-          <h3>Follow the conversation</h3>
-          <p>We're most active on social media. Follow us for behind-the-scenes content, polls, and community banter.</p>
+          <p className="contact-desc">Want to be on the show? Got a collaboration idea? Just want to yarn? Reach out on socials or drop us an email.</p>
           <div className="contact-socials">
             <a href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer"><span className="social-label">Instagram</span><span className="social-handle">@sonigerian_</span></a>
             <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer"><span className="social-label">Twitter / X</span><span className="social-handle">@sonigerian_</span></a>
             <a href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer"><span className="social-label">YouTube</span><span className="social-handle">So Nigerian</span></a>
           </div>
-          <div className="contact-email">
-            <h3>Or email us</h3>
-            <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>
+          <div className="contact-email-block">
+            <span className="contact-email-label">Email</span>
+            <a href={`mailto:${siteConfig.contact.email}`} className="contact-email-link">{siteConfig.contact.email}</a>
           </div>
+          <Link to="/listen" className="contact-listen-btn">
+            <Play size={14} fill="currentColor" /> Listen Now
+          </Link>
         </div>
       </section>
     </main>

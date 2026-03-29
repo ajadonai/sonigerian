@@ -63,6 +63,38 @@
   box-shadow: 0 12px 40px rgba(63,174,90,0.2);
 }
 
+.dilemma-form { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; text-align: left; }
+.df-field { display: flex; flex-direction: column; gap: 6px; }
+.df-field label {
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--text-muted);
+}
+.df-optional { font-weight: 400; text-transform: none; letter-spacing: 0; }
+.df-field input, .df-field textarea {
+  width: 100%; padding: 12px 16px; border-radius: 8px;
+  border: 1.5px solid rgba(244,239,231,0.08);
+  background: rgba(244,239,231,0.03);
+  font-family: var(--font-body); font-size: 14px; color: var(--off-white);
+  outline: none; transition: border-color 0.3s;
+}
+.df-field input:focus, .df-field textarea:focus { border-color: var(--bright-green); }
+.df-field textarea { resize: vertical; }
+.df-options-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.df-success {
+  text-align: center; padding: 14px; border-radius: 8px;
+  background: rgba(63,174,90,0.1); color: var(--bright-green);
+  font-size: 14px; font-weight: 600;
+}
+.df-fallback {
+  display: block; text-align: center; margin-top: 16px;
+  font-size: 11px; color: var(--text-muted); transition: color 0.3s;
+}
+.df-fallback:hover { color: var(--bright-green); }
+
+@media (max-width: 640px) {
+  .df-options-grid { grid-template-columns: 1fr; }
+}
+
 .past-section { margin-top: 48px; }
 .past-heading { font-size: 18px; font-weight: 600; margin-bottom: 20px; }
 
