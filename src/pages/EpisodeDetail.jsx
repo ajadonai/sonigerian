@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Play } from 'lucide-react';
-import { episodes } from '../data/placeholder';
+import { useEpisodes } from '../lib/useEpisodes';
 import SEO from '../components/SEO';
 import ShareButton from '../components/ShareButton';
 import { useReveal } from '../lib/useReveal';
@@ -17,12 +17,14 @@ function RevealItem({ children, delay = 0 }) {
 
 export default function EpisodeDetail() {
   const { slug } = useParams();
+  const { episodes, loading } = useEpisodes();
   const episode = episodes.find(e => e.slug === slug);
   const currentIndex = episodes.findIndex(e => e.slug === slug);
   const nextEpisodes = episodes.slice(currentIndex + 1, currentIndex + 3);
   const [heroRef, heroVisible] = useReveal();
   const [notesRef, notesVisible] = useReveal();
 
+  if (loading) return <main className="episode-detail"><div className="not-found"><p>Loading...</p></div></main>;
   if (!episode) return <main className="episode-detail"><SEO title="Episode Not Found" /><div className="not-found"><p>Episode not found.</p><Link to="/episodes">Back to episodes</Link></div></main>;
 
   return (
@@ -46,9 +48,9 @@ export default function EpisodeDetail() {
           </div>
           <p className="detail-desc">{episode.description}</p>
           <div className="detail-platforms">
-            <button className="plat-btn">Spotify</button>
-            <button className="plat-btn">Apple Podcasts</button>
-            <button className="plat-btn">YouTube</button>
+            {episode.audioUrl && <a href={episode.audioUrl} target="_blank" rel="noopener noreferrer" className="plat-btn">Play Audio</a>}
+            {episode.acastLink && <a href={episode.acastLink} target="_blank" rel="noopener noreferrer" className="plat-btn">Acast</a>}
+            <a href="https://open.spotify.com/show/0IJMdqLjeYBy9xdY30t1M1" target="_blank" rel="noopener noreferrer" className="plat-btn">Spotify</a>
             <ShareButton
               title={`EP ${episode.number}: ${episode.title} — So Nigerian`}
               text={episode.description}

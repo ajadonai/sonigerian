@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Play, ArrowRight, ChevronRight } from 'lucide-react';
-import { episodes, dilemmas, siteConfig } from '../data/placeholder';
+import { dilemmas, siteConfig } from '../data/placeholder';
+import { useEpisodes } from '../lib/useEpisodes';
 import SEO from '../components/SEO';
 import { useReveal } from '../lib/useReveal';
 import './Home.css';
@@ -9,6 +10,7 @@ import './Home.css';
 export default function Home() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [expandedHost, setExpandedHost] = useState(null);
+  const { episodes } = useEpisodes();
   const [aboutRef, aboutVisible] = useReveal();
   const [episodesRef, episodesVisible] = useReveal();
   const [dilemmaRef, dilemmaVisible] = useReveal();

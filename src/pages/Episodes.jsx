@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Play } from 'lucide-react';
-import { episodes, allTags } from '../data/placeholder';
+import { allTags } from '../data/placeholder';
+import { useEpisodes } from '../lib/useEpisodes';
 import SEO from '../components/SEO';
 import { useReveal } from '../lib/useReveal';
 import './Episodes.css';
@@ -23,6 +24,7 @@ export default function Episodes() {
   const [visibleCount, setVisibleCount] = useState(PER_PAGE);
   const [headerRef, headerVisible] = useReveal();
   const [controlsRef, controlsVisible] = useReveal();
+  const { episodes, loading } = useEpisodes();
 
   const filtered = episodes.filter(ep => {
     const matchSearch = ep.title.toLowerCase().includes(search.toLowerCase()) ||
