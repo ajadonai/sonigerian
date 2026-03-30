@@ -339,8 +339,12 @@ export default function Admin() {
                 <div className="form-field"><label>Apple Podcasts</label><input defaultValue="https://podcasts.apple.com/us/podcast/so-nigerian/id1507420236" /></div>
               </div>
               <div className="form-row">
-                <div className="form-field"><label>YouTube channel</label><input defaultValue="https://youtube.com/@sonigerianpodcast" placeholder="https://youtube.com/..." /></div>
-                <div className="form-field"><label>Pod.link</label><input defaultValue="https://pod.link/sonigerian" /></div>
+                <div className="form-field"><label>YouTube</label><input defaultValue="https://youtube.com/@sonigerianpodcast" /></div>
+                <div className="form-field"><label>Acast</label><input defaultValue="https://feeds.acast.com/public/shows/so-nigerian" /></div>
+              </div>
+              <div className="form-row">
+                <div className="form-field"><label>Podbean</label><input defaultValue="https://www.podbean.com/podcast-detail/evymz-14569b/So-Nigerian-Podcast" /></div>
+                <div className="form-field"></div>
               </div>
 
               <h2 className="settings-section-title" style={{ marginTop: 28 }}>Contact</h2>
