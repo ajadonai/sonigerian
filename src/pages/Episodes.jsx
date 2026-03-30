@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Play } from 'lucide-react';
+import { Search, Play, ArrowUpDown } from 'lucide-react';
 import { allTags } from '../data/placeholder';
 import { useEpisodes } from '../lib/useEpisodes';
 import SEO from '../components/SEO';
@@ -22,6 +22,7 @@ export default function Episodes() {
   const [search, setSearch] = useState('');
   const [activeTag, setActiveTag] = useState('All');
   const [visibleCount, setVisibleCount] = useState(PER_PAGE);
+  const [sortOrder, setSortOrder] = useState('newest');
   const [headerRef, headerVisible] = useReveal();
   const [controlsRef, controlsVisible] = useReveal();
   const { episodes, loading } = useEpisodes();
@@ -29,11 +30,16 @@ export default function Episodes() {
   const filtered = episodes.filter(ep => {
     const matchSearch = ep.title.toLowerCase().includes(search.toLowerCase()) ||
       ep.description.toLowerCase().includes(search.toLowerCase());
-    const matchTag = activeTag === 'All' || ep.tags.includes(activeTag);
+    const matchTag = activeTag === 'All' || (ep.tags && ep.tags.includes(activeTag));
     return matchSearch && matchTag;
   });
 
-  const visible = filtered.slice(0, visibleCount);
+  const sorted = [...filtered].sort((a, b) => {
+    if (sortOrder === 'newest') return new Date(b.date) - new Date(a.date);
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  const visible = sorted.slice(0, visibleCount);
 
   const handleTagChange = (tag) => {
     setActiveTag(tag);
@@ -55,30 +61,35 @@ export default function Episodes() {
           <Search size={16} />
           <input type="text" placeholder="Search episodes..." value={search} onChange={e => { setSearch(e.target.value); setVisibleCount(PER_PAGE); }} />
         </div>
-        <div className="tag-filters">
-          {allTags.map(tag => (
-            <button key={tag} className={`filter-btn ${activeTag === tag ? 'active' : ''}`} onClick={() => handleTagChange(tag)}>
-              {tag}
-            </button>
-          ))}
+        <div className="controls-row">
+          <div className="tag-filters">
+            {allTags.map(tag => (
+              <button key={tag} className={`filter-btn ${activeTag === tag ? 'active' : ''}`} onClick={() => handleTagChange(tag)}>
+                {tag}
+              </button>
+            ))}
+          </div>
+          <button className="sort-btn" onClick={() => setSortOrder(s => s === 'newest' ? 'oldest' : 'newest')}>
+            <ArrowUpDown size={13} />
+            {sortOrder === 'newest' ? 'Newest first' : 'Oldest first'}
+          </button>
         </div>
       </div>
 
       <div className="episodes-count">
-        Showing {Math.min(visibleCount, filtered.length)} of {filtered.length} episodes
+        Showing {Math.min(visibleCount, sorted.length)} of {sorted.length} episodes
       </div>
+
+      {loading && <div className="episodes-loading">Loading episodes...</div>}
 
       <div className="episodes-list">
         {visible.map((ep, i) => (
-          <RevealItem key={ep.id} delay={Math.min(i * 0.05, 0.3)}>
+          <RevealItem key={ep.slug || ep.id} delay={Math.min(i * 0.05, 0.3)}>
             <Link to={`/episodes/${ep.slug}`} className="ep-list-item">
-              <div className="ep-list-num">{ep.number}</div>
+              <div className="ep-list-num">{ep.number || '—'}</div>
               <div className="ep-list-info">
                 <h3>{ep.title}</h3>
                 <p>{ep.description}</p>
-              </div>
-              <div className="ep-list-tags">
-                {ep.tags.map(t => <span key={t} className="ep-tag">{t}</span>)}
               </div>
               <div className="ep-list-meta">
                 <span className="ep-list-dur">{ep.duration}</span>
@@ -90,16 +101,16 @@ export default function Episodes() {
         ))}
       </div>
 
-      {visible.length < filtered.length && (
+      {visible.length < sorted.length && (
         <div className="load-more-wrap">
           <button className="load-more" onClick={() => setVisibleCount(v => v + PER_PAGE)}>
             Load more episodes
           </button>
-          <span className="load-more-count">{filtered.length - visible.length} remaining</span>
+          <span className="load-more-count">{sorted.length - visible.length} remaining</span>
         </div>
       )}
 
-      {filtered.length === 0 && (
+      {!loading && sorted.length === 0 && (
         <div className="no-results">
           <p>No episodes found{search ? ` for "${search}"` : ''}{activeTag !== 'All' ? ` in ${activeTag}` : ''}</p>
           <button className="reset-btn" onClick={() => { setSearch(''); setActiveTag('All'); }}>Clear filters</button>
