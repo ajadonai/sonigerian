@@ -52,6 +52,12 @@ export default function Dilemma() {
     <main className="dilemma-page">
       <SEO title="The Dilemma" description="What would you do? Vote on weekly dilemma scenarios." path="/dilemma" />
 
+      <div className="dilemma-decor">
+        <div className="decor-circle decor-1" />
+        <div className="decor-circle decor-2" />
+        <div className="decor-line decor-3" />
+      </div>
+
       <div className={`dilemma-page-header reveal ${headerVisible ? 'visible' : ''}`} ref={headerRef}>
         <div className="eyebrow"><div className="eyebrow-line" /><span>The Dilemma</span></div>
         <h1 className="page-title">What would you do?</h1>

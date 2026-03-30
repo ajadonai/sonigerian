@@ -1,4 +1,38 @@
-.dilemma-page { padding: 120px 56px 80px; max-width: 800px; margin: 0 auto; }
+.dilemma-page {
+  padding: 120px 56px 80px; max-width: 800px; margin: 0 auto;
+  position: relative;
+}
+.dilemma-page::before {
+  content: '?';
+  position: fixed; top: 10%; right: 8%;
+  font-size: 280px; font-weight: 900;
+  color: rgba(63,174,90,0.03);
+  pointer-events: none; z-index: 0;
+  font-family: var(--font-display);
+  transform: rotate(12deg);
+}
+.dilemma-page::after {
+  content: '';
+  position: fixed; top: 30%; left: -5%;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  border: 1px solid rgba(63,174,90,0.04);
+  pointer-events: none; z-index: 0;
+}
+.dilemma-page > * { position: relative; z-index: 1; }
+
+.dilemma-decor { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.decor-circle {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(63,174,90,0.04);
+}
+.decor-1 { width: 400px; height: 400px; top: 15%; left: -8%; }
+.decor-2 { width: 250px; height: 250px; bottom: 10%; right: -3%; border-color: rgba(244,239,231,0.03); }
+.decor-line {
+  position: absolute; top: 40%; right: 5%;
+  width: 1px; height: 200px;
+  background: linear-gradient(to bottom, transparent, rgba(63,174,90,0.06), transparent);
+}
 .dilemma-page-header { text-align: center; margin-bottom: 40px; }
 .dilemma-page-header .eyebrow { justify-content: center; }
 
@@ -7,6 +41,12 @@
   background: rgba(244,239,231,0.02);
   border: 1px solid rgba(63,174,90,0.15);
   border-radius: 14px; padding: 32px; margin-bottom: 20px;
+  position: relative; overflow: hidden;
+}
+.active-dilemma-card::before {
+  content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+  background: linear-gradient(to bottom, var(--bright-green), rgba(63,174,90,0.1));
+  border-radius: 0;
 }
 .active-badge { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
 .active-dot { width: 8px; height: 8px; background: var(--bright-green); border-radius: 50%; animation: blink 2s ease-in-out infinite; }

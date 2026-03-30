@@ -8,7 +8,9 @@ export default function Footer() {
       <div className="footer-green-line" />
       <div className="footer-grid">
         <div className="footer-brand">
-          <Link to="/" className="footer-logo">So<span>Nigerian</span></Link>
+          <Link to="/" className="footer-logo">
+            <img src="/logo.png" alt="So Nigerian Podcast" className="footer-logo-img" />
+          </Link>
           <p className="footer-desc">Bold social commentary unpacking pop culture, relationships, and everyday Nigerian experiences.</p>
           <div className="footer-socials">
             <a href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer" aria-label="X">

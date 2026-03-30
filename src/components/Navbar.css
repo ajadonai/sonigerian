@@ -21,16 +21,15 @@
 }
 
 .nav-logo {
-  font-family: var(--font-display);
-  font-weight: 700; font-size: 26px;
-  color: var(--off-white);
-  letter-spacing: -0.3px;
-  transition: font-size 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
   flex-shrink: 0;
+  display: flex; align-items: center;
+  transition: all 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
-.nav-logo span { color: var(--bright-green); }
-.nav-logo .logo-podcast { color: var(--off-white); font-size: 0.8em; font-weight: 400; letter-spacing: 1px; }
-.navbar.scrolled .nav-logo { font-size: 21px; }
+.nav-logo-img {
+  height: 38px; width: auto;
+  transition: height 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.navbar.scrolled .nav-logo-img { height: 30px; }
 
 .nav-links {
   display: flex; align-items: center; gap: 2px;
@@ -252,8 +251,8 @@
 @media (max-width: 768px) {
   .navbar { padding: 14px 20px; }
   .navbar.scrolled { padding: 10px 20px; }
-  .nav-logo { font-size: 22px; }
-  .navbar.scrolled .nav-logo { font-size: 19px; }
+  .nav-logo-img { height: 30px; }
+  .navbar.scrolled .nav-logo-img { height: 26px; }
   .nav-links, .nav-right { display: none; }
   .hamburger { display: flex; }
 }
