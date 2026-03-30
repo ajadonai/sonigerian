@@ -36,7 +36,12 @@ export default function EpisodeDetail() {
       </RevealItem>
 
       <div className={`detail-hero reveal ${heroVisible ? 'visible' : ''}`} ref={heroRef}>
-        <div className="detail-thumb" style={{ background: `linear-gradient(135deg, #1F6B3A, #3FAE5A)` }}>
+        <div className="detail-thumb">
+          <img className="detail-thumb-img" src="/hosts.png" alt="So Nigerian Podcast" />
+          <div className="detail-thumb-overlay" />
+          <div className="detail-thumb-badge">
+            {episode.season ? `S${episode.season} E${episode.number}` : `EP ${episode.number}`}
+          </div>
           <div className="detail-big-play"><Play size={28} fill="#2E2A28" /></div>
         </div>
         <div className="detail-info">
