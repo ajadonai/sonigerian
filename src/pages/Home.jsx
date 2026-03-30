@@ -130,18 +130,17 @@ export default function Home() {
         </div>
         <div className="episodes-row">
           {latestEpisodes.map(ep => (
-            <Link to={`/episodes/${ep.slug}`} className="ep-card" key={ep.id}>
-              <div className="ep-thumb" style={{ background: `linear-gradient(135deg, ${['#1F6B3A,#3FAE5A', '#5E6F73,#2E2A28', '#BFA27A,#1F6B3A', '#2E2A28,#5E6F73'][ep.id % 4]})` }}>
-                <span className="ep-num">EP {ep.number}</span>
+            <Link to={`/episodes/${ep.slug}`} className="ep-card" key={ep.slug || ep.id}>
+              <div className="ep-thumb">
+                <img src="/hosts.png" alt="So Nigerian" className="ep-thumb-img" />
+                <div className="ep-thumb-overlay" />
+                <span className="ep-num">{ep.season ? `S${ep.season} E${ep.number}` : `EP ${ep.number}`}</span>
                 <div className="ep-play-icon"><Play size={14} fill="white" /></div>
                 <span className="ep-dur">{ep.duration}</span>
               </div>
               <div className="ep-body">
                 <h4>{ep.title}</h4>
                 <p>{ep.description}</p>
-                <div className="ep-tags">
-                  {ep.tags.map(t => <span key={t} className="ep-tag">{t}</span>)}
-                </div>
               </div>
             </Link>
           ))}

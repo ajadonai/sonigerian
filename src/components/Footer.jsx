@@ -50,6 +50,7 @@ export default function Footer() {
         <div className="footer-bottom-right">
           <a href="https://eggcorndigital.com" target="_blank" rel="noopener noreferrer" className="footer-eggcorn">
             <img src="/eggcorn.png" alt="Eggcorn Podcast" />
+            <span className="footer-eggcorn-label">Managed by Eggcorn</span>
           </a>
           <span className="footer-credit">Designed & built by <a href="https://x.com/wlxaj" target="_blank" rel="noopener noreferrer">Trip</a></span>
         </div>
