@@ -127,7 +127,7 @@ export default function Navbar() {
                 className={
                   link.path === '/episodes' && location.pathname.startsWith('/episodes') ? 'active' :
                   link.path === '/dilemma' && location.pathname === '/dilemma' ? 'active' :
-                  link.path === '/' && !link.hash && location.pathname === '/' ? 'active' : ''
+                  link.label === 'Home' && location.pathname === '/' && !location.hash ? 'active' : ''
                 }
                 onClick={(e) => handleNavClick(e, link)}
               >
