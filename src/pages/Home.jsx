@@ -41,7 +41,7 @@ export default function Home() {
             </h1>
             <p className="hero-desc">{siteConfig.heroDescription}</p>
             <div className="hero-actions">
-              <Link to={`/episodes/${episodes[0].slug}`} className="btn-listen">
+              <Link to={episodes.length > 0 ? `/episodes/${episodes[0].slug}` : '/episodes'} className="btn-listen">
                 <Play size={16} fill="currentColor" /> Latest Episode
               </Link>
               <Link to="/episodes" className="btn-episodes">
