@@ -80,13 +80,23 @@ export default function Navbar() {
       },
       { threshold: 0.15, rootMargin: '-60px 0px -40% 0px' }
     );
+
+    const handleScroll = () => {
+      const scrollBottom = window.innerHeight + window.scrollY;
+      if (scrollBottom >= document.body.offsetHeight - 100) {
+        setActiveSection('contact');
+      }
+    };
+
     setTimeout(() => {
       sections.forEach(id => {
         const el = document.getElementById(id);
         if (el) observer.observe(el);
       });
     }, 300);
-    return () => observer.disconnect();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => { observer.disconnect(); window.removeEventListener('scroll', handleScroll); };
   }, [location.pathname]);
 
   const getActiveClass = (link) => {
