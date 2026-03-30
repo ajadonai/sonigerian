@@ -15,6 +15,13 @@
 .detail-info h1 { font-family: var(--font-display); font-size: 32px; font-weight: 700; margin: 8px 0; line-height: 1.2; }
 .detail-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
 .detail-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px; }
+
+.audio-player-wrap { margin-bottom: 20px; }
+.audio-player {
+  width: 100%; height: 44px; border-radius: 8px;
+  outline: none;
+}
+
 .detail-platforms { display: flex; gap: 8px; flex-wrap: wrap; }
 .plat-btn {
   font-size: 11px; padding: 9px 20px; border-radius: 4px;

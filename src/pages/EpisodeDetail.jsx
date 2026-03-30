@@ -40,15 +40,25 @@ export default function EpisodeDetail() {
           <div className="detail-big-play"><Play size={28} fill="#2E2A28" /></div>
         </div>
         <div className="detail-info">
-          <span className="detail-ep-num">Episode {episode.number}</span>
+          <span className="detail-ep-num">
+            {episode.season ? `Season ${episode.season}, ` : ''}Episode {episode.number}
+          </span>
           <h1>{episode.title}</h1>
           <div className="detail-meta">
             {new Date(episode.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-            {' '}&bull; {episode.duration} &bull; {episode.tags.join(', ')}
+            {' '}&bull; {episode.duration}
           </div>
           <p className="detail-desc">{episode.description}</p>
+
+          {episode.audioUrl && (
+            <div className="audio-player-wrap">
+              <audio controls preload="none" className="audio-player">
+                <source src={episode.audioUrl} type="audio/mpeg" />
+              </audio>
+            </div>
+          )}
+
           <div className="detail-platforms">
-            {episode.audioUrl && <a href={episode.audioUrl} target="_blank" rel="noopener noreferrer" className="plat-btn">Play Audio</a>}
             {episode.acastLink && <a href={episode.acastLink} target="_blank" rel="noopener noreferrer" className="plat-btn">Acast</a>}
             <a href="https://open.spotify.com/show/0IJMdqLjeYBy9xdY30t1M1" target="_blank" rel="noopener noreferrer" className="plat-btn">Spotify</a>
             <ShareButton
