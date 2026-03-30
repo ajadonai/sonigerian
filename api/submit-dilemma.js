@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'So Nigerian <onboarding@resend.dev>',
-        to: ['SoNigerian@eggcorndigital.com'],
+        to: ['oluwadamilarearogundade@gmail.com'],
         subject: `🎙️ New Dilemma from "${name}"`,
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; background: #1a1917; border-radius: 12px; overflow: hidden;">
