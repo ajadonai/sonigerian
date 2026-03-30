@@ -103,8 +103,12 @@ export default function Dilemma() {
 
       <RevealItem delay={0.1}>
         <div className="submit-dilemma">
-          <h2>Got a dilemma?</h2>
-          <p>Big problem, small problem, or problem wey you create by yourself 😭... we accept all! Fill the form sharp sharp 📝🔥</p>
+          <div className="sd-image">
+            <img src="/hosts-highfive.jpg" alt="Dami and Isaac" />
+          </div>
+          <div className="sd-content">
+            <h2>Got a dilemma?</h2>
+            <p>Big problem, small problem, or problem wey you create by yourself 😭... we accept all! Fill the form sharp sharp 📝🔥</p>
           <form className="dilemma-form" onSubmit={handleSubmit}>
             <div className="df-field">
               <label>Name <span className="df-hint">(preferably a nickname or fake name)</span></label>
@@ -134,6 +138,7 @@ export default function Dilemma() {
             )}
           </form>
           <a href="https://forms.gle/LKG8XM4v2yrax5dj9" target="_blank" rel="noopener noreferrer" className="df-fallback">Having issues? Submit via Google Form</a>
+          </div>
         </div>
       </RevealItem>
 

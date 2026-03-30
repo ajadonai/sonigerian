@@ -45,6 +45,14 @@
 }
 .footer-credit a:hover { opacity: 0.7; }
 
+.footer-eggcorn { display: flex; align-items: center; }
+.footer-eggcorn img {
+  height: 24px; width: auto;
+  opacity: 0.5; transition: opacity 0.3s;
+  filter: invert(1);
+}
+.footer-eggcorn:hover img { opacity: 0.8; }
+
 @media (max-width: 768px) {
   .footer { padding: 32px 20px 20px; }
   .footer-inner { flex-direction: column; gap: 24px; }
