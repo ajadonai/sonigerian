@@ -131,24 +131,11 @@ export default function Admin() {
               <div className="stat-card"><div className="sc-label">Active dilemma votes</div><div className="sc-val">{totalVotes.toLocaleString()}</div></div>
               <div className="stat-card"><div className="sc-label">Submissions</div><div className="sc-val">23</div></div>
             </div>
-            <div className="admin-section-header">
-              <h2>Recent episodes</h2>
-              <button className="admin-add-btn" onClick={() => setActiveTab('episodes')}><Plus size={14} /> Add episode</button>
+            <div className="quick-actions">
+              <button className="qa-btn" onClick={() => setActiveTab('episodes')}><Plus size={16} /> Add episode</button>
+              <button className="qa-btn" onClick={() => setActiveTab('dilemma')}><Layers size={16} /> Post dilemma</button>
+              <button className="qa-btn" onClick={() => setActiveTab('messages')}><Mail size={16} /> View submissions</button>
             </div>
-            <table className="admin-table">
-              <thead><tr><th>#</th><th>Title</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
-              <tbody>
-                {episodes.slice(0, 5).map(ep => (
-                  <tr key={ep.id}>
-                    <td>{ep.number}</td>
-                    <td className="td-title">{ep.title}</td>
-                    <td><span className={`status-badge ${ep.status}`}>{ep.status}</span></td>
-                    <td>{new Date(ep.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
-                    <td><button className="tbl-btn"><Edit size={12} /></button><button className="tbl-btn del"><Trash2 size={12} /></button></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         )}
 
@@ -335,7 +322,36 @@ export default function Admin() {
           <div className="admin-content">
             <div className="admin-header"><h1>Settings</h1></div>
             <div className="admin-form">
-              <h2 className="settings-section-title">Admin users</h2>
+
+              <h2 className="settings-section-title">Social media links</h2>
+              <div className="form-row">
+                <div className="form-field"><label>Instagram</label><input defaultValue={siteConfig.socials.instagram} placeholder="https://instagram.com/..." /></div>
+                <div className="form-field"><label>Twitter / X</label><input defaultValue={siteConfig.socials.twitter} placeholder="https://x.com/..." /></div>
+              </div>
+              <div className="form-row">
+                <div className="form-field"><label>YouTube</label><input defaultValue={siteConfig.socials.youtube} placeholder="https://youtube.com/..." /></div>
+                <div className="form-field"><label>TikTok</label><input defaultValue={siteConfig.socials.tiktok || ''} placeholder="https://tiktok.com/..." /></div>
+              </div>
+
+              <h2 className="settings-section-title" style={{ marginTop: 28 }}>Listen now links</h2>
+              <div className="form-row">
+                <div className="form-field"><label>Spotify</label><input defaultValue="https://open.spotify.com/show/0IJMdqLjeYBy9xdY30t1M1" /></div>
+                <div className="form-field"><label>Apple Podcasts</label><input defaultValue="https://podcasts.apple.com/us/podcast/so-nigerian/id1507420236" /></div>
+              </div>
+              <div className="form-row">
+                <div className="form-field"><label>YouTube channel</label><input defaultValue="https://youtube.com/@sonigerianpodcast" placeholder="https://youtube.com/..." /></div>
+                <div className="form-field"><label>Pod.link</label><input defaultValue="https://pod.link/sonigerian" /></div>
+              </div>
+
+              <h2 className="settings-section-title" style={{ marginTop: 28 }}>Contact</h2>
+              <div className="form-row">
+                <div className="form-field"><label>Contact email</label><input defaultValue={siteConfig.contact.email} /></div>
+                <div className="form-field"><label>Form submissions email</label><input defaultValue="oluwadamilarearogundade@gmail.com" /></div>
+              </div>
+
+              <button className="admin-save-btn" style={{ marginTop: 16 }}>Save site settings</button>
+
+              <h2 className="settings-section-title" style={{ marginTop: 36 }}>Admin users</h2>
               {ADMIN_USERS.map(u => (
                 <div className="user-manage-card" key={u.email}>
                   <div className="umc-header">
