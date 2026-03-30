@@ -6,17 +6,18 @@
   align-items: center;
   justify-content: space-between;
   padding: 18px 56px;
-  background: rgba(46, 42, 40, 0.97);
+  background: transparent;
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
-  border-bottom: none;
+  border-bottom: 1px solid rgba(244,239,231,0.06);
   transition: all 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .navbar.scrolled {
   padding: 12px 56px;
-  background: rgba(46, 42, 40, 0.5);
+  background: rgba(46, 42, 40, 0.85);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+  border-bottom-color: rgba(244,239,231,0.08);
 }
 
 .nav-logo {
@@ -32,16 +33,16 @@
 .navbar.scrolled .nav-logo { font-size: 21px; }
 
 .nav-links {
-  display: flex; align-items: center; gap: 4px;
+  display: flex; align-items: center; gap: 2px;
   background: rgba(244,239,231,0.03);
   border: 1px solid rgba(244,239,231,0.06);
-  border-radius: 100px; padding: 4px;
+  border-radius: 100px; padding: 5px 6px;
 }
 .nav-links a {
   color: rgba(244,239,231,0.5);
-  font-size: 12px; font-weight: 500;
+  font-size: 11px; font-weight: 500;
   text-transform: uppercase; letter-spacing: 1.5px;
-  padding: 7px 16px; border-radius: 100px;
+  padding: 8px 20px; border-radius: 100px;
   transition: all 0.3s;
 }
 .nav-links a:hover { color: var(--off-white); background: rgba(244,239,231,0.03); }
