@@ -182,7 +182,7 @@ export default function Home() {
       <section className={`contact-section reveal ${contactVisible ? 'visible' : ''}`} id="contact" ref={contactRef}>
         <div className="contact-image-side">
           <div className="contact-image-wrap">
-            <img src="/hosts-wide.jpg" alt="Dami and Isaac" />
+            <img src="/hosts-contact.jpg" alt="Dami and Isaac" />
             <div className="contact-image-overlay" />
             <div className="contact-image-text">
               <span>Let's talk</span>

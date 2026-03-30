@@ -80,10 +80,13 @@
 .footer-eggcorn { display: flex; align-items: center; }
 .footer-eggcorn img {
   height: 28px; width: auto;
-  opacity: 0.35; transition: opacity 0.3s;
+  opacity: 0.35; transition: all 0.3s;
   filter: invert(1);
+  border: 1px solid rgba(63,174,90,0.3);
+  border-radius: 6px;
+  padding: 4px 8px;
 }
-.footer-eggcorn:hover img { opacity: 0.6; }
+.footer-eggcorn:hover img { opacity: 0.6; border-color: var(--bright-green); }
 
 .footer-credit a {
   color: var(--bright-green); transition: opacity 0.3s;
