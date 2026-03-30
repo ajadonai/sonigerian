@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { LayoutDashboard, Radio, Layers, Mail, Settings, LogOut, Plus, Edit, Trash2, RotateCcw, Archive, X } from 'lucide-react';
-import { episodes, dilemmas, siteConfig, allTags } from '../data/placeholder';
+import { LayoutDashboard, Layers, Mail, Settings, LogOut, Plus, Trash2, RotateCcw, Archive, X, RefreshCw, Edit } from 'lucide-react';
+import { dilemmas, siteConfig } from '../data/placeholder';
 import './Admin.css';
 
 const ADMIN_USERS = [
   { email: 'oluwadamilarearogundade@gmail.com', password: 'soNigerian', name: 'Dami Aros', role: 'master' },
-  { email: 'Deeaigbadumah@gmail.com', password: 'soNigerian', name: 'Isaac Aigbadumah', role: 'admin' },
+  { email: 'deeaigbadumah@gmail.com', password: 'soNigerian', name: 'Isaac Aigbadumah', role: 'admin' },
 ];
 
 export default function Admin() {
@@ -14,50 +14,47 @@ export default function Admin() {
   const [loginError, setLoginError] = useState('');
   const [activeTab, setActiveTab] = useState('dashboard');
 
-  // Episode form state
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [customTag, setCustomTag] = useState('');
-  const [availableTags, setAvailableTags] = useState(allTags.filter(t => t !== 'All'));
-  const [episodeView, setEpisodeView] = useState('manage');
-
   // Dilemma form state
   const [dilemmaScenario, setDilemmaScenario] = useState('');
   const [dilemmaOptions, setDilemmaOptions] = useState(['', '']);
   const [showDilemmaForm, setShowDilemmaForm] = useState(false);
 
-  const toggleTag = (tag) => {
-    setSelectedTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]);
-  };
-
-  const addCustomTag = () => {
-    const tag = customTag.trim();
-    if (tag && !availableTags.includes(tag)) {
-      setAvailableTags(prev => [...prev, tag]);
-      setSelectedTags(prev => [...prev, tag]);
-    } else if (tag && !selectedTags.includes(tag)) {
-      setSelectedTags(prev => [...prev, tag]);
-    }
-    setCustomTag('');
-  };
+  // Sync state
+  const [syncing, setSyncing] = useState(false);
+  const [lastSync, setLastSync] = useState(null);
+  const [episodeCount, setEpisodeCount] = useState(null);
 
   const addDilemmaOption = () => {
     if (dilemmaOptions.length < 6) setDilemmaOptions([...dilemmaOptions, '']);
   };
-
   const removeDilemmaOption = (index) => {
     if (dilemmaOptions.length > 2) setDilemmaOptions(dilemmaOptions.filter((_, i) => i !== index));
   };
-
   const updateDilemmaOption = (index, value) => {
     const updated = [...dilemmaOptions];
     updated[index] = value;
     setDilemmaOptions(updated);
   };
 
+  const handleSync = async () => {
+    setSyncing(true);
+    try {
+      sessionStorage.removeItem('sn-episodes');
+      const res = await fetch('/api/episodes');
+      const data = await res.json();
+      if (data.episodes) {
+        setEpisodeCount(data.total);
+        sessionStorage.setItem('sn-episodes', JSON.stringify({ data: data.episodes, timestamp: Date.now() }));
+      }
+      setLastSync(new Date().toLocaleTimeString());
+    } catch (e) {}
+    setSyncing(false);
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
     const found = ADMIN_USERS.find(u => u.email.toLowerCase() === loginForm.email.toLowerCase() && u.password === loginForm.password);
-    if (found) { setUser(found); setLoginError(''); }
+    if (found) { setUser(found); setLoginError(''); handleSync(); }
     else setLoginError('Invalid credentials');
   };
 
@@ -87,7 +84,6 @@ export default function Admin() {
   const isMaster = user.role === 'master';
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'episodes', label: 'Episodes', icon: Radio },
     { id: 'dilemma', label: 'Dilemma', icon: Layers },
     { id: 'messages', label: 'Messages', icon: Mail },
     ...(isMaster ? [{ id: 'settings', label: 'Settings', icon: Settings }] : []),
@@ -126,95 +122,30 @@ export default function Admin() {
               <h1>Welcome back, {user.name.split(' ')[0]}</h1>
               <span className="admin-date">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</span>
             </div>
-            <div className="stats-grid">
-              <div className="stat-card"><div className="sc-label">Episodes</div><div className="sc-val">{episodes.length}</div></div>
-              <div className="stat-card"><div className="sc-label">Active dilemma votes</div><div className="sc-val">{totalVotes.toLocaleString()}</div></div>
-              <div className="stat-card"><div className="sc-label">Submissions</div><div className="sc-val">23</div></div>
-            </div>
-            <div className="quick-actions">
-              <button className="qa-btn" onClick={() => setActiveTab('episodes')}><Plus size={16} /> Add episode</button>
-              <button className="qa-btn" onClick={() => setActiveTab('dilemma')}><Layers size={16} /> Post dilemma</button>
-              <button className="qa-btn" onClick={() => setActiveTab('messages')}><Mail size={16} /> View submissions</button>
-            </div>
-          </div>
-        )}
 
-        {/* EPISODES */}
-        {activeTab === 'episodes' && (
-          <div className="admin-content">
-            <div className="admin-header">
-              <h1>{episodeView === 'manage' ? 'All episodes' : 'Add episode'}</h1>
-              <button className="admin-add-btn" onClick={() => setEpisodeView(episodeView === 'manage' ? 'add' : 'manage')}>
-                {episodeView === 'manage' ? <><Plus size={14} /> Add new</> : <><X size={14} /> Back to list</>}
+            <div className="sync-card">
+              <div className="sync-info">
+                <h3>RSS Feed Sync</h3>
+                <p>Episodes auto-sync from Acast every 10 minutes. Use this button to force an immediate refresh.</p>
+                {episodeCount && <span className="sync-count">{episodeCount} episodes synced</span>}
+                {lastSync && <span className="sync-time">Last synced: {lastSync}</span>}
+              </div>
+              <button className={`sync-btn ${syncing ? 'syncing' : ''}`} onClick={handleSync} disabled={syncing}>
+                <RefreshCw size={16} className={syncing ? 'spin' : ''} />
+                {syncing ? 'Syncing...' : 'Sync now'}
               </button>
             </div>
 
-            {episodeView === 'manage' && (
-              <>
-                <div className="ep-count">{episodes.length} episodes total</div>
-                <table className="admin-table">
-                  <thead><tr><th>#</th><th>Title</th><th>Tags</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
-                  <tbody>
-                    {episodes.map(ep => (
-                      <tr key={ep.id}>
-                        <td>{ep.number}</td>
-                        <td className="td-title">{ep.title}</td>
-                        <td className="td-tags">{ep.tags.map(t => <span key={t} className="mini-tag">{t}</span>)}</td>
-                        <td><span className={`status-badge ${ep.status}`}>{ep.status}</span></td>
-                        <td>{new Date(ep.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
-                        <td>
-                          <button className="tbl-btn"><Edit size={12} /></button>
-                          <button className="tbl-btn del"><Trash2 size={12} /></button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </>
-            )}
-
-            {episodeView === 'add' && (
-              <div className="admin-form">
-              <div className="form-row">
-                <div className="form-field"><label>Episode title</label><input placeholder="e.g. Owambe Pressure" /></div>
-                <div className="form-field"><label>Episode number</label><input type="number" placeholder={episodes.length + 1} /></div>
-              </div>
-              <div className="form-field full"><label>Description / Show notes</label><textarea placeholder="Write the episode description..." rows={4} /></div>
-              <div className="form-row">
-                <div className="form-field"><label>Duration</label><input placeholder="42:15" /></div>
-                <div className="form-field">
-                  <label>Status</label>
-                  <select><option>Published</option><option>Draft</option></select>
-                </div>
-              </div>
-              <div className="form-field full">
-                <label>Tags</label>
-                <div className="tag-selector">
-                  <div className="tag-options">
-                    {availableTags.map(tag => (
-                      <button key={tag} type="button" className={`tag-opt ${selectedTags.includes(tag) ? 'selected' : ''}`} onClick={() => toggleTag(tag)}>
-                        {tag}
-                        {selectedTags.includes(tag) && <X size={10} />}
-                      </button>
-                    ))}
-                  </div>
-                  <div className="tag-custom">
-                    <input placeholder="Add custom tag..." value={customTag} onChange={e => setCustomTag(e.target.value)} onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addCustomTag())} />
-                    <button type="button" className="tag-add-btn" onClick={addCustomTag}><Plus size={12} /></button>
-                  </div>
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="form-field"><label>Spotify link</label><input placeholder="https://open.spotify.com/..." /></div>
-                <div className="form-field"><label>Apple Podcasts link</label><input placeholder="https://podcasts.apple.com/..." /></div>
-              </div>
-              <div className="form-row">
-                <div className="form-field"><label>YouTube link</label><input placeholder="https://youtube.com/..." /></div>
-                <div className="form-field"><label>Thumbnail</label><input type="file" /></div>
-              </div>
-              <button className="admin-save-btn"><Plus size={14} /> Save episode</button>
+            <div className="stats-grid">
+              <div className="stat-card"><div className="sc-label">Episodes</div><div className="sc-val">{episodeCount || '—'}</div></div>
+              <div className="stat-card"><div className="sc-label">Active dilemma votes</div><div className="sc-val">{totalVotes.toLocaleString()}</div></div>
+              <div className="stat-card"><div className="sc-label">Submissions</div><div className="sc-val">23</div></div>
             </div>
-            )}
+
+            <div className="quick-actions">
+              <button className="qa-btn" onClick={() => { setActiveTab('dilemma'); setShowDilemmaForm(true); }}><Plus size={16} /> Post dilemma</button>
+              <button className="qa-btn" onClick={() => setActiveTab('messages')}><Mail size={16} /> View submissions</button>
+            </div>
           </div>
         )}
 
@@ -309,7 +240,7 @@ export default function Admin() {
                 </div>
                 <p className="msg-body">{m.gist}</p>
                 <div className="msg-actions">
-                  <button className="tbl-btn">Use as dilemma</button>
+                  <button className="tbl-btn" onClick={() => { setActiveTab('dilemma'); setShowDilemmaForm(true); setDilemmaScenario(m.gist); }}>Use as dilemma</button>
                   <button className="tbl-btn del"><Trash2 size={12} /> Delete</button>
                 </div>
               </div>
@@ -325,15 +256,15 @@ export default function Admin() {
 
               <h2 className="settings-section-title">Social media links</h2>
               <div className="form-row">
-                <div className="form-field"><label>Instagram</label><input defaultValue={siteConfig.socials.instagram} placeholder="https://instagram.com/..." /></div>
-                <div className="form-field"><label>Twitter / X</label><input defaultValue={siteConfig.socials.twitter} placeholder="https://x.com/..." /></div>
+                <div className="form-field"><label>Instagram</label><input defaultValue={siteConfig.socials.instagram} /></div>
+                <div className="form-field"><label>Twitter / X</label><input defaultValue={siteConfig.socials.twitter} /></div>
               </div>
               <div className="form-row">
-                <div className="form-field"><label>YouTube</label><input defaultValue={siteConfig.socials.youtube} placeholder="https://youtube.com/..." /></div>
+                <div className="form-field"><label>YouTube</label><input defaultValue={siteConfig.socials.youtube} /></div>
                 <div className="form-field"><label>TikTok</label><input defaultValue={siteConfig.socials.tiktok || ''} placeholder="https://tiktok.com/..." /></div>
               </div>
 
-              <h2 className="settings-section-title" style={{ marginTop: 28 }}>Listen now links</h2>
+              <h2 className="settings-section-title" style={{ marginTop: 28 }}>Platform links</h2>
               <div className="form-row">
                 <div className="form-field"><label>Spotify</label><input defaultValue="https://open.spotify.com/show/0IJMdqLjeYBy9xdY30t1M1" /></div>
                 <div className="form-field"><label>Apple Podcasts</label><input defaultValue="https://podcasts.apple.com/us/podcast/so-nigerian/id1507420236" /></div>
@@ -380,7 +311,7 @@ export default function Admin() {
       </div>
 
       <div className="admin-bottom-nav">
-        {tabs.slice(0, 4).map(t => (
+        {tabs.slice(0, 3).map(t => (
           <button key={t.id} className={`admin-bnav ${activeTab === t.id ? 'active' : ''}`} onClick={() => setActiveTab(t.id)}>
             <t.icon size={18} /><span>{t.label}</span>
           </button>

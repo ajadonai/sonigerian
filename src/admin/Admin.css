@@ -189,7 +189,30 @@
 .admin-save-btn:hover { background: #4bc46a; }
 
 /* QUICK ACTIONS */
-.quick-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 8px; }
+.quick-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+
+/* SYNC CARD */
+.sync-card {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: 10px; padding: 20px 24px; margin-bottom: 20px;
+}
+.sync-info h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.sync-info p { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 6px; }
+.sync-count { font-size: 12px; color: var(--bright-green); font-weight: 600; display: block; }
+.sync-time { font-size: 10px; color: var(--text-faint); display: block; margin-top: 2px; }
+.sync-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 6px;
+  background: rgba(63,174,90,0.08); border: 1px solid rgba(63,174,90,0.2);
+  color: var(--bright-green); font-weight: 600; font-size: 12px;
+  font-family: var(--font-body); cursor: pointer;
+  transition: all 0.3s; white-space: nowrap; flex-shrink: 0;
+}
+.sync-btn:hover { background: var(--bright-green); color: var(--charcoal); border-color: var(--bright-green); }
+.sync-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .qa-btn {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   padding: 16px; border-radius: 8px;
@@ -236,6 +259,8 @@
   .admin-bnav.active { color: var(--bright-green); }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .quick-actions { grid-template-columns: 1fr; }
+  .sync-card { flex-direction: column; text-align: center; }
+  .sync-btn { width: 100%; justify-content: center; }
   .form-row { grid-template-columns: 1fr; }
   .roles-grid { grid-template-columns: 1fr; }
   .admin-header h1 { font-size: 18px; }
