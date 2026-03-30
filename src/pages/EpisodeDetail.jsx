@@ -52,7 +52,7 @@ export default function EpisodeDetail() {
             <ShareButton
               title={`EP ${episode.number}: ${episode.title} — So Nigerian`}
               text={episode.description}
-              url={`https://sonigerian.vercel.app/episodes/${episode.slug}`}
+              url={`https://sonigerian.com/episodes/${episode.slug}`}
             />
           </div>
         </div>
