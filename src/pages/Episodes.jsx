@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Play, ArrowUpDown } from 'lucide-react';
-import { allTags } from '../data/placeholder';
 import { useEpisodes } from '../lib/useEpisodes';
 import SEO from '../components/SEO';
 import { useReveal } from '../lib/useReveal';
@@ -20,19 +19,16 @@ function RevealItem({ children, delay = 0 }) {
 
 export default function Episodes() {
   const [search, setSearch] = useState('');
-  const [activeTag, setActiveTag] = useState('All');
   const [visibleCount, setVisibleCount] = useState(PER_PAGE);
   const [sortOrder, setSortOrder] = useState('newest');
   const [headerRef, headerVisible] = useReveal();
   const [controlsRef, controlsVisible] = useReveal();
   const { episodes, loading } = useEpisodes();
 
-  const filtered = episodes.filter(ep => {
-    const matchSearch = ep.title.toLowerCase().includes(search.toLowerCase()) ||
-      ep.description.toLowerCase().includes(search.toLowerCase());
-    const matchTag = activeTag === 'All' || (ep.tags && ep.tags.includes(activeTag));
-    return matchSearch && matchTag;
-  });
+  const filtered = episodes.filter(ep =>
+    ep.title.toLowerCase().includes(search.toLowerCase()) ||
+    ep.description.toLowerCase().includes(search.toLowerCase())
+  );
 
   const sorted = [...filtered].sort((a, b) => {
     if (sortOrder === 'newest') return new Date(b.date) - new Date(a.date);
@@ -40,11 +36,6 @@ export default function Episodes() {
   });
 
   const visible = sorted.slice(0, visibleCount);
-
-  const handleTagChange = (tag) => {
-    setActiveTag(tag);
-    setVisibleCount(PER_PAGE);
-  };
 
   return (
     <main className="episodes-page">
@@ -61,19 +52,10 @@ export default function Episodes() {
           <Search size={16} />
           <input type="text" placeholder="Search episodes..." value={search} onChange={e => { setSearch(e.target.value); setVisibleCount(PER_PAGE); }} />
         </div>
-        <div className="controls-row">
-          <div className="tag-filters">
-            {allTags.map(tag => (
-              <button key={tag} className={`filter-btn ${activeTag === tag ? 'active' : ''}`} onClick={() => handleTagChange(tag)}>
-                {tag}
-              </button>
-            ))}
-          </div>
-          <button className="sort-btn" onClick={() => setSortOrder(s => s === 'newest' ? 'oldest' : 'newest')}>
-            <ArrowUpDown size={13} />
-            {sortOrder === 'newest' ? 'Newest first' : 'Oldest first'}
-          </button>
-        </div>
+        <button className="sort-btn" onClick={() => setSortOrder(s => s === 'newest' ? 'oldest' : 'newest')}>
+          <ArrowUpDown size={13} />
+          {sortOrder === 'newest' ? 'Newest first' : 'Oldest first'}
+        </button>
       </div>
 
       <div className="episodes-count">
@@ -84,9 +66,13 @@ export default function Episodes() {
 
       <div className="episodes-list">
         {visible.map((ep, i) => (
-          <RevealItem key={ep.slug || ep.id} delay={Math.min(i * 0.05, 0.3)}>
+          <RevealItem key={ep.slug || ep.id} delay={Math.min(i * 0.04, 0.25)}>
             <Link to={`/episodes/${ep.slug}`} className="ep-list-item">
-              <div className="ep-list-num">{ep.number || '—'}</div>
+              <div className="ep-list-left">
+                <div className="ep-list-num-badge">
+                  {ep.season ? `S${ep.season} E${ep.number}` : ep.number || '—'}
+                </div>
+              </div>
               <div className="ep-list-info">
                 <h3>{ep.title}</h3>
                 <p>{ep.description}</p>
@@ -112,8 +98,8 @@ export default function Episodes() {
 
       {!loading && sorted.length === 0 && (
         <div className="no-results">
-          <p>No episodes found{search ? ` for "${search}"` : ''}{activeTag !== 'All' ? ` in ${activeTag}` : ''}</p>
-          <button className="reset-btn" onClick={() => { setSearch(''); setActiveTag('All'); }}>Clear filters</button>
+          <p>No episodes found{search ? ` for "${search}"` : ''}</p>
+          <button className="reset-btn" onClick={() => setSearch('')}>Clear search</button>
         </div>
       )}
     </main>

@@ -24,24 +24,35 @@
 .filter-btn.active { background: var(--bright-green); color: var(--charcoal); border-color: var(--bright-green); }
 
 .ep-list-item {
-  display: grid; grid-template-columns: 48px 1fr auto auto 40px;
-  gap: 16px; align-items: center; padding: 18px 0;
-  border-bottom: 1px solid rgba(244,239,231,0.04);
-  transition: all 0.2s;
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 18px; border-radius: 10px;
+  border: 1px solid rgba(244,239,231,0.04);
+  background: rgba(244,239,231,0.02);
+  transition: all 0.25s; margin-bottom: 6px;
 }
-.ep-list-item:hover { background: rgba(244,239,231,0.02); border-radius: 8px; padding-left: 12px; margin-left: -12px; padding-right: 12px; margin-right: -12px; }
-.ep-list-num { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--text-faint); text-align: center; }
-.ep-list-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
-.ep-list-info p { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
-.ep-list-tags { display: flex; gap: 6px; }
-.ep-list-meta { text-align: right; }
+.ep-list-item:hover {
+  border-color: rgba(63,174,90,0.2);
+  background: rgba(63,174,90,0.04);
+  transform: translateX(4px);
+}
+.ep-list-left { flex-shrink: 0; }
+.ep-list-num-badge {
+  min-width: 52px; padding: 6px 10px; border-radius: 6px;
+  background: rgba(63,174,90,0.08); color: var(--bright-green);
+  font-size: 10px; font-weight: 700; text-align: center;
+  letter-spacing: 0.5px; white-space: nowrap;
+}
+.ep-list-info { flex: 1; min-width: 0; }
+.ep-list-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ep-list-info p { font-size: 12px; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.ep-list-meta { text-align: right; flex-shrink: 0; }
 .ep-list-dur { font-size: 12px; color: var(--text-secondary); display: block; }
 .ep-list-date { font-size: 10px; color: var(--text-muted); }
 .ep-list-play {
   width: 36px; height: 36px; border-radius: 50%;
   border: 1px solid rgba(244,239,231,0.1);
   display: flex; align-items: center; justify-content: center;
-  color: var(--text-muted); transition: all 0.3s;
+  color: var(--text-muted); transition: all 0.3s; flex-shrink: 0;
 }
 .ep-list-item:hover .ep-list-play { border-color: var(--bright-green); color: var(--bright-green); }
 
@@ -58,13 +69,14 @@
 
 .episodes-count { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
 
-.controls-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
+.episodes-controls { margin-bottom: 20px; }
+.episodes-controls .search-box { margin-bottom: 12px; }
 .sort-btn {
-  display: flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: 6px;
   background: none; border: 1px solid rgba(244,239,231,0.08);
   color: var(--text-muted); padding: 7px 14px; border-radius: 6px;
   font-size: 11px; font-weight: 500; font-family: var(--font-body);
-  cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
 }
 .sort-btn:hover { border-color: var(--bright-green); color: var(--bright-green); }
 
@@ -83,7 +95,10 @@
 
 @media (max-width: 768px) {
   .episodes-page { padding: 100px 20px 60px; }
-  .ep-list-item { grid-template-columns: 36px 1fr auto; }
+  .ep-list-item { padding: 12px; gap: 10px; }
+  .ep-list-num-badge { min-width: 40px; font-size: 9px; padding: 5px 6px; }
+  .ep-list-play { display: none; }
+  .ep-list-meta { display: none; }
   .ep-list-tags, .ep-list-play { display: none; }
   .search-box { min-width: 100%; }
 }
