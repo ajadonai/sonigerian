@@ -93,9 +93,10 @@
 }
 .df-fallback {
   display: block; text-align: center; margin-top: 16px;
-  font-size: 11px; color: var(--text-muted); transition: color 0.3s;
+  font-size: 12px; color: var(--bright-green); transition: opacity 0.3s;
+  text-decoration: underline; text-underline-offset: 3px;
 }
-.df-fallback:hover { color: var(--bright-green); }
+.df-fallback:hover { opacity: 0.7; }
 
 @media (max-width: 640px) {
   .df-options-grid { grid-template-columns: 1fr; }
