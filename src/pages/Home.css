@@ -426,6 +426,7 @@
 
   .episodes-section, .about-section, .contact-section, .dilemma-section { padding: 48px 20px; }
   .episodes-row { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ep-card { border-bottom: 1px solid rgba(244,239,231,0.06); padding-bottom: 12px; }
   .ep-thumb { height: 120px; }
 
   .dilemma-card { padding: 24px; }
@@ -441,6 +442,7 @@
 
 @media (max-width: 400px) {
   .episodes-row { grid-template-columns: 1fr; }
+  .ep-card { border-bottom: 1px solid rgba(244,239,231,0.06); padding-bottom: 12px; margin-bottom: 4px; }
   .hero-title { font-size: clamp(28px, 9vw, 38px); }
   .hero-desc { font-size: 12px; margin-bottom: 12px; }
   .btn-listen { padding: 10px 18px; font-size: 10px; }
