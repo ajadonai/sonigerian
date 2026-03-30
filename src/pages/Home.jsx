@@ -203,7 +203,7 @@ export default function Home() {
             <a href={`mailto:${siteConfig.contact.email}`} className="contact-email-link">{siteConfig.contact.email}</a>
           </div>
           <Link to="/listen" className="contact-listen-btn">
-            <Play size={14} fill="currentColor" /> Listen Now
+            All Platforms
           </Link>
         </div>
       </section>

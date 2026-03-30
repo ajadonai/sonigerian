@@ -139,8 +139,7 @@ export default function Navbar() {
         <div className="nav-right">
           <FontToggle className="desktop-only" />
           <a href="/listen" className="nav-cta" onClick={(e) => { e.preventDefault(); navigate('/listen'); }}>
-            <Play size={12} fill="currentColor" />
-            Listen Now
+            Platforms
           </a>
         </div>
         <button className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Menu">
@@ -165,7 +164,7 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="panel-bottom">
-          <a href="/listen" className="panel-cta" onClick={(e) => { e.preventDefault(); navigate('/listen'); setMenuOpen(false); document.body.style.overflow = ''; }}>Listen Now</a>
+          <a href="/listen" className="panel-cta" onClick={(e) => { e.preventDefault(); navigate('/listen'); setMenuOpen(false); document.body.style.overflow = ''; }}>Platforms</a>
           <div className="panel-font-section">
             <span className="panel-font-label">Text size</span>
             <div className="panel-font-buttons">

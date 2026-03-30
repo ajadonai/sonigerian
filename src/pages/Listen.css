@@ -53,8 +53,13 @@
 .platform-icon {
   width: 44px; height: 44px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-size: 20px;
-  font-weight: 700; color: #fff; flex-shrink: 0;
+  flex-shrink: 0;
+  background: rgba(244,239,231,0.04);
+  border: 1px solid rgba(244,239,231,0.06);
+  transition: all 0.3s;
+}
+.platform-card:hover .platform-icon {
+  background: rgba(244,239,231,0.08);
 }
 .platform-info { flex: 1; }
 .platform-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }

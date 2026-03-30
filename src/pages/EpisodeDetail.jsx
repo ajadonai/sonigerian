@@ -64,8 +64,8 @@ export default function EpisodeDetail() {
           )}
 
           <div className="detail-platforms">
-            {episode.acastLink && <a href={episode.acastLink} target="_blank" rel="noopener noreferrer" className="plat-btn">Acast</a>}
             <a href="https://open.spotify.com/show/0IJMdqLjeYBy9xdY30t1M1" target="_blank" rel="noopener noreferrer" className="plat-btn">Spotify</a>
+            <Link to="/listen" className="plat-btn">All platforms</Link>
             <ShareButton
               title={`EP ${episode.number}: ${episode.title} — So Nigerian`}
               text={episode.description}
