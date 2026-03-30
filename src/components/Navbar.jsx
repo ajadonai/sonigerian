@@ -69,7 +69,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (location.pathname !== '/') return;
-    const sections = ['home', 'about', 'episodes-teaser', 'dilemma-preview', 'contact'];
+    const sections = ['home', 'about', 'contact'];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -78,12 +78,14 @@ export default function Navbar() {
           }
         });
       },
-      { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' }
+      { threshold: 0.15, rootMargin: '-60px 0px -40% 0px' }
     );
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    setTimeout(() => {
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }, 300);
     return () => observer.disconnect();
   }, [location.pathname]);
 
@@ -110,6 +112,8 @@ export default function Navbar() {
   const handleNavClick = (e, link) => {
     e.preventDefault();
     if (link.hash) {
+      const sectionId = link.hash.replace('#', '');
+      setActiveSection(sectionId);
       if (location.pathname === '/') {
         const el = document.querySelector(link.hash);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
