@@ -29,6 +29,7 @@ export default function Navbar() {
     setMenuOpen(false);
     setFontMenuOpen(false);
     document.body.style.overflow = '';
+    if (location.pathname === '/') setActiveSection('home');
   }, [location]);
 
   useEffect(() => {
@@ -62,6 +63,40 @@ export default function Navbar() {
     setMenuOpen(!menuOpen);
     setFontMenuOpen(false);
     document.body.style.overflow = !menuOpen ? 'hidden' : '';
+  };
+
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    if (location.pathname !== '/') return;
+    const sections = ['home', 'about', 'episodes-teaser', 'dilemma-preview', 'contact'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' }
+    );
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  const getActiveClass = (link) => {
+    if (link.path === '/episodes' && location.pathname.startsWith('/episodes')) return 'active';
+    if (link.path === '/dilemma' && location.pathname === '/dilemma') return 'active';
+    if (link.path === '/listen' && location.pathname === '/listen') return 'active';
+    if (location.pathname === '/' && link.hash) {
+      const sectionId = link.hash.replace('#', '');
+      if (sectionId === activeSection) return 'active';
+    }
+    if (location.pathname !== '/' && !link.hash && link.path === location.pathname) return 'active';
+    return '';
   };
 
   const navLinks = [
@@ -124,11 +159,7 @@ export default function Navbar() {
             <li key={link.label}>
               <a
                 href={link.hash ? '/' + link.hash : link.path}
-                className={
-                  link.path === '/episodes' && location.pathname.startsWith('/episodes') ? 'active' :
-                  link.path === '/dilemma' && location.pathname === '/dilemma' ? 'active' :
-                  link.label === 'Home' && location.pathname === '/' && !location.hash ? 'active' : ''
-                }
+                className={getActiveClass(link)}
                 onClick={(e) => handleNavClick(e, link)}
               >
                 {link.label}
