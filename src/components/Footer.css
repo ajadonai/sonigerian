@@ -47,7 +47,7 @@
 
 .footer-eggcorn { display: flex; align-items: center; }
 .footer-eggcorn img {
-  height: 24px; width: auto;
+  height: 40px; width: auto;
   opacity: 0.5; transition: opacity 0.3s;
   filter: invert(1);
 }
