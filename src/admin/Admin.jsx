@@ -18,6 +18,7 @@ export default function Admin() {
   const [selectedTags, setSelectedTags] = useState([]);
   const [customTag, setCustomTag] = useState('');
   const [availableTags, setAvailableTags] = useState(allTags.filter(t => t !== 'All'));
+  const [episodeView, setEpisodeView] = useState('manage');
 
   // Dilemma form state
   const [dilemmaScenario, setDilemmaScenario] = useState('');
@@ -154,8 +155,39 @@ export default function Admin() {
         {/* EPISODES */}
         {activeTab === 'episodes' && (
           <div className="admin-content">
-            <div className="admin-header"><h1>Add episode</h1></div>
-            <div className="admin-form">
+            <div className="admin-header">
+              <h1>{episodeView === 'manage' ? 'All episodes' : 'Add episode'}</h1>
+              <button className="admin-add-btn" onClick={() => setEpisodeView(episodeView === 'manage' ? 'add' : 'manage')}>
+                {episodeView === 'manage' ? <><Plus size={14} /> Add new</> : <><X size={14} /> Back to list</>}
+              </button>
+            </div>
+
+            {episodeView === 'manage' && (
+              <>
+                <div className="ep-count">{episodes.length} episodes total</div>
+                <table className="admin-table">
+                  <thead><tr><th>#</th><th>Title</th><th>Tags</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+                  <tbody>
+                    {episodes.map(ep => (
+                      <tr key={ep.id}>
+                        <td>{ep.number}</td>
+                        <td className="td-title">{ep.title}</td>
+                        <td className="td-tags">{ep.tags.map(t => <span key={t} className="mini-tag">{t}</span>)}</td>
+                        <td><span className={`status-badge ${ep.status}`}>{ep.status}</span></td>
+                        <td>{new Date(ep.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
+                        <td>
+                          <button className="tbl-btn"><Edit size={12} /></button>
+                          <button className="tbl-btn del"><Trash2 size={12} /></button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            )}
+
+            {episodeView === 'add' && (
+              <div className="admin-form">
               <div className="form-row">
                 <div className="form-field"><label>Episode title</label><input placeholder="e.g. Owambe Pressure" /></div>
                 <div className="form-field"><label>Episode number</label><input type="number" placeholder={episodes.length + 1} /></div>
@@ -195,6 +227,7 @@ export default function Admin() {
               </div>
               <button className="admin-save-btn"><Plus size={14} /> Save episode</button>
             </div>
+            )}
           </div>
         )}
 
@@ -302,24 +335,25 @@ export default function Admin() {
           <div className="admin-content">
             <div className="admin-header"><h1>Settings</h1></div>
             <div className="admin-form">
-              <h2 className="settings-section-title">Change password</h2>
-              <div className="form-row">
-                <div className="form-field"><label>Current password</label><input type="password" placeholder="Enter current password" /></div>
-                <div className="form-field"><label>New password</label><input type="password" placeholder="Enter new password" /></div>
-              </div>
-              <button className="admin-save-btn" style={{ marginTop: 8 }}>Update password</button>
-
-              <h2 className="settings-section-title" style={{ marginTop: 32 }}>Admin users</h2>
-              <div className="roles-grid">
-                {ADMIN_USERS.map(u => (
-                  <div className="role-card" key={u.email}>
+              <h2 className="settings-section-title">Admin users</h2>
+              {ADMIN_USERS.map(u => (
+                <div className="user-manage-card" key={u.email}>
+                  <div className="umc-header">
                     <div className="role-avatar">{u.name.split(' ').map(n => n[0]).join('')}</div>
-                    <h3>{u.name}</h3>
-                    <span className={`role-tag ${u.role}`}>{u.role === 'master' ? 'Master' : 'Admin'}</span>
-                    <p className="role-email">{u.email}</p>
+                    <div className="umc-info">
+                      <h3>{u.name}</h3>
+                      <span className={`role-tag ${u.role}`}>{u.role === 'master' ? 'Master' : 'Admin'}</span>
+                    </div>
                   </div>
-                ))}
-              </div>
+                  <p className="role-email">{u.email}</p>
+                  <div className="form-row" style={{ marginTop: 12 }}>
+                    <div className="form-field"><label>New password for {u.name.split(' ')[0]}</label><input type="password" placeholder="Enter new password" /></div>
+                    <div className="form-field" style={{ display: 'flex', alignItems: 'flex-end' }}>
+                      <button className="admin-add-btn">Update password</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}

@@ -188,6 +188,23 @@
 }
 .admin-save-btn:hover { background: #4bc46a; }
 
+/* EPISODE MANAGEMENT */
+.ep-count { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+.td-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.mini-tag {
+  font-size: 9px; padding: 2px 7px; border-radius: 100px;
+  background: rgba(63,174,90,0.08); color: var(--bright-green); font-weight: 600;
+}
+
+/* USER MANAGEMENT */
+.user-manage-card {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: 10px; padding: 20px; margin-bottom: 12px;
+}
+.umc-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.umc-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.umc-info .role-tag { margin-bottom: 0; }
+
 /* MOBILE BOTTOM NAV */
 .admin-bottom-nav { display: none; }
 
