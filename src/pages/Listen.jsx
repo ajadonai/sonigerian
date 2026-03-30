@@ -39,7 +39,7 @@ export default function Listen() {
       <div className={`listen-split reveal ${headerVisible ? 'visible' : ''}`} ref={headerRef}>
         <div className="listen-image-side">
           <div className="listen-image-wrap">
-            <img src="/hosts.png" alt="Dami Aros and Isaac — So Nigerian" />
+            <img src="/hosts.jpg" alt="Dami Aros and Isaac — So Nigerian" />
             <div className="listen-image-overlay" />
           </div>
           <div className="listen-image-footer">

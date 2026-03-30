@@ -66,7 +66,7 @@ export default function Home() {
           </div>
           <div className="hero-right">
             <div className="hero-image-container">
-              <img className="hero-image" src="/hosts.png" alt="Dami Aros and Isaac — So Nigerian Podcast hosts" />
+              <img className="hero-image" src="/hosts.jpg" alt="Dami Aros and Isaac — So Nigerian Podcast hosts" />
               <div className="hero-image-overlay" />
             </div>
             <div className="hero-decorator top-accent" />
@@ -101,7 +101,7 @@ export default function Home() {
         <div className="about-right">
           {siteConfig.hosts.map(host => (
             <div className="host-card" key={host.name}>
-              <img className="host-photo" src={host.image} alt={host.name} />
+              <img loading="lazy" className="host-photo" src={host.image} alt={host.name} />
               <div className="host-info">
                 <h3>{host.name}</h3>
                 <span className="host-role">{host.role}</span>
@@ -132,7 +132,7 @@ export default function Home() {
           {latestEpisodes.map(ep => (
             <Link to={`/episodes/${ep.slug}`} className="ep-card" key={ep.slug || ep.id}>
               <div className="ep-thumb">
-                <img src="/hosts.png" alt="So Nigerian" className="ep-thumb-img" />
+                <img loading="lazy" src="/hosts.jpg" alt="So Nigerian" className="ep-thumb-img" />
                 <div className="ep-thumb-overlay" />
                 <span className="ep-num">{ep.season ? `S${ep.season} E${ep.number}` : `EP ${ep.number}`}</span>
                 <div className="ep-play-icon"><Play size={14} fill="white" /></div>
@@ -181,7 +181,7 @@ export default function Home() {
       <section className={`contact-section reveal ${contactVisible ? 'visible' : ''}`} id="contact" ref={contactRef}>
         <div className="contact-image-side">
           <div className="contact-image-wrap">
-            <img src="/hosts-contact.jpg" alt="Dami and Isaac" />
+            <img loading="lazy" src="/hosts-contact.jpg" alt="Dami and Isaac" />
             <div className="contact-image-overlay" />
             <div className="contact-image-text">
               <span>Let's talk</span>

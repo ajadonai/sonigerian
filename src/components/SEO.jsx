@@ -9,7 +9,7 @@ const DEFAULTS = {
   twitterHandle: '@sonigerian_',
 };
 
-export default function SEO({ title, description, path = '' }) {
+export default function SEO({ title, description, path = '', episodeData = null }) {
   const fullTitle = title ? `${title} — So Nigerian Podcast` : DEFAULTS.title;
   const desc = description || DEFAULTS.description;
   const url = `${DEFAULTS.url}${path}`;
@@ -60,7 +60,75 @@ export default function SEO({ title, description, path = '' }) {
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', url);
-  }, [fullTitle, desc, url, image]);
+
+    // JSON-LD Structured Data
+    let ldScript = document.querySelector('script[data-seo-ld]');
+    if (!ldScript) {
+      ldScript = document.createElement('script');
+      ldScript.setAttribute('type', 'application/ld+json');
+      ldScript.setAttribute('data-seo-ld', 'true');
+      document.head.appendChild(ldScript);
+    }
+
+    if (episodeData) {
+      // Episode page
+      ldScript.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'PodcastEpisode',
+        name: episodeData.title,
+        description: desc,
+        url: url,
+        datePublished: episodeData.date,
+        duration: episodeData.duration,
+        associatedMedia: episodeData.audioUrl ? {
+          '@type': 'MediaObject',
+          contentUrl: episodeData.audioUrl,
+          encodingFormat: 'audio/mpeg',
+        } : undefined,
+        partOfSeries: {
+          '@type': 'PodcastSeries',
+          name: 'So Nigerian',
+          url: 'https://sonigerian.com',
+        },
+      });
+    } else if (path === '' || path === '/') {
+      // Homepage — podcast series schema
+      ldScript.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'PodcastSeries',
+        name: 'So Nigerian',
+        description: DEFAULTS.description,
+        url: 'https://sonigerian.com',
+        image: image,
+        author: [
+          { '@type': 'Person', name: 'Dami Aros' },
+          { '@type': 'Person', name: 'Isaac Aigbadumah' },
+        ],
+        publisher: {
+          '@type': 'Organization',
+          name: 'Eggcorn Digital',
+          url: 'https://eggcorndigital.com',
+        },
+        inLanguage: 'en',
+        genre: ['Society & Culture', 'Comedy'],
+        webFeed: 'https://feeds.acast.com/public/shows/so-nigerian',
+      });
+    } else {
+      // Other pages — website schema
+      ldScript.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: fullTitle,
+        description: desc,
+        url: url,
+        isPartOf: {
+          '@type': 'WebSite',
+          name: 'So Nigerian Podcast',
+          url: 'https://sonigerian.com',
+        },
+      });
+    }
+  }, [fullTitle, desc, url, image, episodeData]);
 
   return null;
 }

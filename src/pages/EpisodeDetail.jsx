@@ -29,7 +29,7 @@ export default function EpisodeDetail() {
 
   return (
     <main className="episode-detail">
-      <SEO title={`EP ${episode.number}: ${episode.title}`} description={episode.description} path={`/episodes/${episode.slug}`} />
+      <SEO title={`EP ${episode.number}: ${episode.title}`} description={episode.description} path={`/episodes/${episode.slug}`} episodeData={episode} />
 
       <RevealItem>
         <Link to="/episodes" className="back-link"><ArrowLeft size={16} /> Back to episodes</Link>
@@ -37,7 +37,7 @@ export default function EpisodeDetail() {
 
       <div className={`detail-hero reveal ${heroVisible ? 'visible' : ''}`} ref={heroRef}>
         <div className="detail-thumb">
-          <img className="detail-thumb-img" src="/hosts.png" alt="So Nigerian Podcast" />
+          <img className="detail-thumb-img" src="/hosts.jpg" alt="So Nigerian Podcast" />
           <div className="detail-thumb-overlay" />
           <div className="detail-thumb-badge">
             {episode.season ? `S${episode.season} E${episode.number}` : `EP ${episode.number}`}

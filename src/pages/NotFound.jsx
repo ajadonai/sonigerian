@@ -6,7 +6,7 @@ export default function NotFound() {
     <main className="not-found-page">
       <div className="nf-content">
         <div className="nf-image">
-          <img src="/hosts.png" alt="Dami and Isaac" />
+          <img src="/hosts.jpg" alt="Dami and Isaac" />
         </div>
         <span className="nf-code">404</span>
         <h1>Page not found</h1>

@@ -134,7 +134,7 @@ export default function Dilemma() {
       <RevealItem delay={0.1}>
         <div className="submit-dilemma">
           <div className="sd-image">
-            <img src="/hosts-highfive.jpg" alt="Dami and Isaac" />
+            <img loading="lazy" src="/hosts-highfive.jpg" alt="Dami and Isaac" />
           </div>
           <div className="sd-content">
             <h2>Got a dilemma?</h2>
